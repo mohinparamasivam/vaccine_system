@@ -12,11 +12,11 @@ import org.apache.logging.log4j.Logger;
  * @author howar
  */
 public class Personnel extends User {
+    private static final Logger logger = LogManager.getLogger(Personnel.class);
 
-    private static final Logger logger = LogManager.getLogger(User.class);
-
-    public Personnel(String username, String password) {
-        super(username, password);
-        logger.info("Personnel {} created.", this.getUsername());
+    public Personnel(String username, String name, String password) {
+        super(username, name, password);
+        logger.info("Personnel created successfully: {}", this.getName());
     }
+
 }
