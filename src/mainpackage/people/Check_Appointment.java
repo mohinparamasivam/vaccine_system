@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mainpackage;
+package mainpackage.people;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Mohin Paramasivam
  */
 public class Check_Appointment extends javax.swing.JFrame {
-
+    JFrame jFrame_popup = new JFrame();
     /**
      * Creates new form Check_Appointment
      */
@@ -80,6 +83,11 @@ public class Check_Appointment extends javax.swing.JFrame {
         jButton5.setText("X");
         jButton5.setActionCommand("X2");
         jButton5.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,7 +158,6 @@ public class Check_Appointment extends javax.swing.JFrame {
                     .addContainerGap(209, Short.MAX_VALUE)))
         );
 
-        jLabel2.getAccessibleContext().setAccessibleName("Dose 2 : ");
         jButton5.getAccessibleContext().setAccessibleName("X2");
 
         pack();
@@ -170,8 +177,18 @@ public class Check_Appointment extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        jDateChooser1.setDate(null);
+        JOptionPane.showMessageDialog(jFrame_popup, "Appointment Cancelled !");
+        /* Add code here to cancel the appointment */
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        jDateChooser2.setDate(null);
+        JOptionPane.showMessageDialog(jFrame_popup, "Appointment Cancelled !");
+         /* Add code here to cancel the appointment */
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

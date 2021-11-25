@@ -129,9 +129,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Dose 2 : "/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Dose 2 : "/>
-      </AccessibilityProperties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
     </Component>
@@ -200,6 +197,9 @@
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="X2"/>
       </AccessibilityProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
