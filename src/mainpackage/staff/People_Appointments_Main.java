@@ -122,21 +122,21 @@ public class People_Appointments_Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Register_People hframe = new Register_People();
+        Schedule_Appointment hframe = new Schedule_Appointment();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Search_People_Records hframe = new Search_People_Records();
+        Search_Appointment_Records hframe = new Search_Appointment_Records();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Modify_People hframe = new Modify_People();
+        Modify_Appointment hframe = new Modify_Appointment();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
