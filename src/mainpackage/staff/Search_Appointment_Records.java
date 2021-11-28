@@ -43,12 +43,12 @@ public class Search_Appointment_Records extends javax.swing.JFrame {
                 dm=(DefaultTableModel) jTable2.getModel();
                 
                 //ADD COLUMNS
-                dm.addColumn("IC");
-                dm.addColumn("Patient Name");
-                dm.addColumn("Dose1");
-                dm.addColumn("Time");
-                dm.addColumn("Dose2");
-                dm.addColumn("Time");
+                dm.addColumn("     IC/Passport");
+                dm.addColumn("     Patient Name");
+                dm.addColumn("          Dose1");
+                dm.addColumn("          Time");
+                dm.addColumn("          Dose2");
+                dm.addColumn("          Time");
             }
 
      
