@@ -218,7 +218,7 @@ public class View_Vaccine_Supply extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        People_Appointments_Main hframe = new People_Appointments_Main();
+        VaccineCentre_Main hframe = new VaccineCentre_Main();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
