@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mainpackage.staff;
+package View.staff;
 
-import mainpackage.people.Login;
+import View.people.Login;
 
 
 /**

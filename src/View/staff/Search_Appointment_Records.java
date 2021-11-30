@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mainpackage.staff;
+package View.staff;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,20 +18,21 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Mohin Paramasivam
  */
-public class View_Vaccine_Supply extends javax.swing.JFrame {
+public class Search_Appointment_Records extends javax.swing.JFrame {
             DefaultTableModel dm;
             JFrame jFrame_popup = new JFrame();
-            String centre_name;
-            String pfizer_count;
-            String sinovac_count;
-            String astrazeneca_count;
-            
+            String people_ic;
+            String people_name;
+            String people_dose1_date;
+            String people_dose1_time;
+            String people_dose2_date;
+            String people_dose2_time;
      
             
     /**
      * Creates new form Search_People_Records
      */
-    public View_Vaccine_Supply() {
+    public Search_Appointment_Records() {
         initComponents();
          CreateColumns();
     }
@@ -42,18 +43,20 @@ public class View_Vaccine_Supply extends javax.swing.JFrame {
                 dm=(DefaultTableModel) jTable2.getModel();
                 
                 //ADD COLUMNS
-                dm.addColumn("      Vaccination Centre");
-                dm.addColumn("              Pfizer");
-                dm.addColumn("              Sinovac");
-                dm.addColumn("              AstraZeneca");
+                dm.addColumn("     IC/Passport");
+                dm.addColumn("     Patient Name");
+                dm.addColumn("          Dose1");
+                dm.addColumn("          Time");
+                dm.addColumn("          Dose2");
+                dm.addColumn("          Time");
             }
 
      
      //ADD ROWS DATA
      
-     private void Populate(String centre,String pfizer,String sinovac,String astrazeneca)
+     private void Populate(String ic,String name,String dose1_date,String dose1_time,String dose2_date,String dose2_time)
      {
-         String[] rowData={centre,pfizer,sinovac,astrazeneca};
+         String[] rowData={ic,name,dose1_date,dose1_time,dose2_date,dose2_time};
          dm.addRow(rowData);
      }
      
@@ -104,7 +107,7 @@ public class View_Vaccine_Supply extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Vaccine Supply ");
+        jLabel1.setText("Appointment Details");
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -154,7 +157,7 @@ public class View_Vaccine_Supply extends javax.swing.JFrame {
                         .addGap(120, 120, 120))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(256, 256, 256))))
+                        .addGap(269, 269, 269))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,23 +186,23 @@ public class View_Vaccine_Supply extends javax.swing.JFrame {
         
          try{
            
-            Scanner vaccination_supply_file = new Scanner(new File("C:\\Java_Assignment_Degree\\Vaccine_System\\src\\mainpackage\\staff\\vaccine_supply.txt"));
+            Scanner appointment_details_file = new Scanner(new File("C:\\Java_Assignment_Degree\\Vaccine_System\\src\\mainpackage\\staff\\appointment_details.txt"));
                  
-            while (vaccination_supply_file.hasNextLine()) {
-                                    String[] appointment_details = vaccination_supply_file.nextLine().split(":",4);
+            while (appointment_details_file.hasNextLine()) {
+                                    String[] appointment_details = appointment_details_file.nextLine().split(":",6);
                                    // Debug : JOptionPane.showMessageDialog(jFrame_popup, people_details);
                                     
-                                   
-                                   
-                                    centre_name="               "+appointment_details[0];
-                                    pfizer_count="               "+appointment_details[1];
-                                    sinovac_count="               "+appointment_details[2];
-                                    astrazeneca_count="               "+appointment_details[3];
-                                    Populate(centre_name,pfizer_count,sinovac_count,astrazeneca_count);
+                                    people_ic = appointment_details[0];
+                                    people_name = appointment_details[1];
+                                    people_dose1_date = appointment_details[2];
+                                    people_dose1_time = appointment_details[3];  
+                                    people_dose2_date = appointment_details[4];
+                                    people_dose2_time = appointment_details[5];
+                                    Populate(people_ic,people_name,people_dose1_date,people_dose1_time,people_dose2_date,people_dose2_time);
                                     
                                          
                                    }
-            vaccination_supply_file.close();
+            appointment_details_file.close();
        
     }catch (FileNotFoundException j){}
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -218,7 +221,7 @@ public class View_Vaccine_Supply extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        VaccineCentre_Main hframe = new VaccineCentre_Main();
+        People_Appointments_Main hframe = new People_Appointments_Main();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -253,7 +256,7 @@ public class View_Vaccine_Supply extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new View_Vaccine_Supply().setVisible(true);
+                new Search_Appointment_Records().setVisible(true);
             }
         });
     }

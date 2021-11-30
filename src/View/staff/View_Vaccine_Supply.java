@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mainpackage.staff;
+package View.staff;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,19 +18,20 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Mohin Paramasivam
  */
-public class Search_People_Records extends javax.swing.JFrame {
+public class View_Vaccine_Supply extends javax.swing.JFrame {
             DefaultTableModel dm;
             JFrame jFrame_popup = new JFrame();
-            String people_ic;
-            String people_name;
-            String people_password;
-            String people_citizenship;
+            String centre_name;
+            String pfizer_count;
+            String sinovac_count;
+            String astrazeneca_count;
+            
      
             
     /**
      * Creates new form Search_People_Records
      */
-    public Search_People_Records() {
+    public View_Vaccine_Supply() {
         initComponents();
          CreateColumns();
     }
@@ -41,18 +42,18 @@ public class Search_People_Records extends javax.swing.JFrame {
                 dm=(DefaultTableModel) jTable2.getModel();
                 
                 //ADD COLUMNS
-                dm.addColumn("               IC/Passport");
-                dm.addColumn("              Password");
-                dm.addColumn("                  Name");
-                dm.addColumn("              Citizenship");
+                dm.addColumn("      Vaccination Centre");
+                dm.addColumn("              Pfizer");
+                dm.addColumn("              Sinovac");
+                dm.addColumn("              AstraZeneca");
             }
 
      
      //ADD ROWS DATA
      
-     private void Populate(String ic,String password,String name,String citizenship)
+     private void Populate(String centre,String pfizer,String sinovac,String astrazeneca)
      {
-         String[] rowData={ic,password,name,citizenship};
+         String[] rowData={centre,pfizer,sinovac,astrazeneca};
          dm.addRow(rowData);
      }
      
@@ -84,8 +85,6 @@ public class Search_People_Records extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane2.setColumnHeader(null);
-
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -105,7 +104,7 @@ public class Search_People_Records extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("People Details");
+        jLabel1.setText("Vaccine Supply ");
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -144,9 +143,6 @@ public class Search_People_Records extends javax.swing.JFrame {
                 .addContainerGap(86, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(317, 317, 317))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -155,14 +151,17 @@ public class Search_People_Records extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(125, 125, 125)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120))))
+                        .addGap(120, 120, 120))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(256, 256, 256))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -181,23 +180,26 @@ public class Search_People_Records extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
          try{
            
-            Scanner people_details_file = new Scanner(new File("C:\\Java_Assignment_Degree\\Vaccine_System\\src\\mainpackage\\staff\\people_details.txt"));
+            Scanner vaccination_supply_file = new Scanner(new File("C:\\Java_Assignment_Degree\\Vaccine_System\\src\\mainpackage\\staff\\vaccine_supply.txt"));
                  
-            while (people_details_file.hasNextLine()) {
-                                    String[] people_details = people_details_file.nextLine().split(":",7);
+            while (vaccination_supply_file.hasNextLine()) {
+                                    String[] appointment_details = vaccination_supply_file.nextLine().split(":",4);
                                    // Debug : JOptionPane.showMessageDialog(jFrame_popup, people_details);
                                     
-                                    people_ic = people_details[0];
-                                    people_name = people_details[1];
-                                    people_password = people_details[2];
-                                    people_citizenship = people_details[6];   
-                                    Populate(people_ic,people_password,people_name,people_citizenship);
+                                   
+                                   
+                                    centre_name="               "+appointment_details[0];
+                                    pfizer_count="               "+appointment_details[1];
+                                    sinovac_count="               "+appointment_details[2];
+                                    astrazeneca_count="               "+appointment_details[3];
+                                    Populate(centre_name,pfizer_count,sinovac_count,astrazeneca_count);
                                     
                                          
                                    }
-            people_details_file.close();
+            vaccination_supply_file.close();
        
     }catch (FileNotFoundException j){}
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -216,7 +218,7 @@ public class Search_People_Records extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        People_Records_Main hframe = new People_Records_Main();
+        VaccineCentre_Main hframe = new VaccineCentre_Main();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -251,7 +253,7 @@ public class Search_People_Records extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Search_People_Records().setVisible(true);
+                new View_Vaccine_Supply().setVisible(true);
             }
         });
     }

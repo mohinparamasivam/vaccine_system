@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mainpackage.staff;
+package View.staff;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,21 +18,19 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Mohin Paramasivam
  */
-public class Search_Appointment_Records extends javax.swing.JFrame {
+public class Search_People_Records extends javax.swing.JFrame {
             DefaultTableModel dm;
             JFrame jFrame_popup = new JFrame();
             String people_ic;
             String people_name;
-            String people_dose1_date;
-            String people_dose1_time;
-            String people_dose2_date;
-            String people_dose2_time;
+            String people_password;
+            String people_citizenship;
      
             
     /**
      * Creates new form Search_People_Records
      */
-    public Search_Appointment_Records() {
+    public Search_People_Records() {
         initComponents();
          CreateColumns();
     }
@@ -43,20 +41,18 @@ public class Search_Appointment_Records extends javax.swing.JFrame {
                 dm=(DefaultTableModel) jTable2.getModel();
                 
                 //ADD COLUMNS
-                dm.addColumn("     IC/Passport");
-                dm.addColumn("     Patient Name");
-                dm.addColumn("          Dose1");
-                dm.addColumn("          Time");
-                dm.addColumn("          Dose2");
-                dm.addColumn("          Time");
+                dm.addColumn("               IC/Passport");
+                dm.addColumn("              Password");
+                dm.addColumn("                  Name");
+                dm.addColumn("              Citizenship");
             }
 
      
      //ADD ROWS DATA
      
-     private void Populate(String ic,String name,String dose1_date,String dose1_time,String dose2_date,String dose2_time)
+     private void Populate(String ic,String password,String name,String citizenship)
      {
-         String[] rowData={ic,name,dose1_date,dose1_time,dose2_date,dose2_time};
+         String[] rowData={ic,password,name,citizenship};
          dm.addRow(rowData);
      }
      
@@ -107,7 +103,7 @@ public class Search_Appointment_Records extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Appointment Details");
+        jLabel1.setText("People Details");
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -146,6 +142,9 @@ public class Search_Appointment_Records extends javax.swing.JFrame {
                 .addContainerGap(86, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(317, 317, 317))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -154,17 +153,14 @@ public class Search_Appointment_Records extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(125, 125, 125)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(269, 269, 269))))
+                        .addGap(120, 120, 120))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -183,26 +179,23 @@ public class Search_Appointment_Records extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
          try{
            
-            Scanner appointment_details_file = new Scanner(new File("C:\\Java_Assignment_Degree\\Vaccine_System\\src\\mainpackage\\staff\\appointment_details.txt"));
+            Scanner people_details_file = new Scanner(new File("C:\\Java_Assignment_Degree\\Vaccine_System\\src\\mainpackage\\staff\\people_details.txt"));
                  
-            while (appointment_details_file.hasNextLine()) {
-                                    String[] appointment_details = appointment_details_file.nextLine().split(":",6);
+            while (people_details_file.hasNextLine()) {
+                                    String[] people_details = people_details_file.nextLine().split(":",7);
                                    // Debug : JOptionPane.showMessageDialog(jFrame_popup, people_details);
                                     
-                                    people_ic = appointment_details[0];
-                                    people_name = appointment_details[1];
-                                    people_dose1_date = appointment_details[2];
-                                    people_dose1_time = appointment_details[3];  
-                                    people_dose2_date = appointment_details[4];
-                                    people_dose2_time = appointment_details[5];
-                                    Populate(people_ic,people_name,people_dose1_date,people_dose1_time,people_dose2_date,people_dose2_time);
+                                    people_ic = people_details[0];
+                                    people_name = people_details[1];
+                                    people_password = people_details[2];
+                                    people_citizenship = people_details[6];   
+                                    Populate(people_ic,people_password,people_name,people_citizenship);
                                     
                                          
                                    }
-            appointment_details_file.close();
+            people_details_file.close();
        
     }catch (FileNotFoundException j){}
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -221,7 +214,7 @@ public class Search_Appointment_Records extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        People_Appointments_Main hframe = new People_Appointments_Main();
+        People_Records_Main hframe = new People_Records_Main();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -256,7 +249,7 @@ public class Search_Appointment_Records extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Search_Appointment_Records().setVisible(true);
+                new Search_People_Records().setVisible(true);
             }
         });
     }

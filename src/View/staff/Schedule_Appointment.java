@@ -1,4 +1,4 @@
-package mainpackage.staff;
+package View.staff;
 
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
