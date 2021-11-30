@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,17 +11,32 @@ import java.util.UUID;
  *
  * @author howar
  */
-public abstract class User implements Serializable {
-    private final String userId;
+public abstract class User implements Model {
+    private final UUID userId;
     private String username;
     private String name;
     private String password;
 
+    @Override
+    public UUID getKey() {
+        return userId;
+    }
+
     public User(String username, String name, String password) {
-        this.userId = UUID.randomUUID().toString();
+        this.userId = UUID.randomUUID();
         this.username = username;
         this.name = name;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "userId=" + userId + ", username=" + username + ", name=" + name + ", password=" + password + '}';
+    }
+
+
+    public UUID getUserId() {
+        return userId;
     }
 
     public String getName() {

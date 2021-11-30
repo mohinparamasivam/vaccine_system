@@ -4,20 +4,39 @@
  */
 package model;
 
+import java.util.UUID;
+
 /**
  *
  * @author howar
  */
-abstract class Vaccine {
+public abstract class Vaccine implements Model {
 
+    private final UUID vaccineId;
     private String name;
     private int dosageNeeded;
     private int daysNeeded;
 
     public Vaccine(String name, int dosageNeeded, int daysNeeded) {
+        this.vaccineId = UUID.randomUUID();
         this.name = name;
         this.dosageNeeded = dosageNeeded;
         this.daysNeeded = daysNeeded;
+    }
+
+    @Override
+    public String toString() {
+        return "Vaccine{" + "vaccineId=" + vaccineId + ", name=" + name + ", dosageNeeded=" + dosageNeeded + ", daysNeeded=" + daysNeeded + '}';
+    }
+
+
+    @Override
+    public UUID getKey() {
+        return vaccineId;
+    }
+
+    public UUID getVaccineId() {
+        return vaccineId;
     }
 
     public String getName() {

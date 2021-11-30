@@ -4,12 +4,15 @@
  */
 package model;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 /**
  *
  * @author howar
  */
-public interface Generatable {
+public interface Model extends Serializable {
 
-    public String getGenerateContent();
+    public UUID getKey();
 
 }

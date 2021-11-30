@@ -5,23 +5,36 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
  * @author howar
  */
-public class Appointment {
+public class Appointment implements Model {
 
+    private final UUID appointmentId;
     private LocalDateTime time;
     private Centre centre;
     private People people;
     private AppointmentStatus appointmentStatus;
 
+    @Override
+    public String toString() {
+        return "Appointment{" + "appointmentId=" + appointmentId + ", time=" + time + ", centre=" + centre + ", people=" + people + ", appointmentStatus=" + appointmentStatus + '}';
+    }
+
     public Appointment(LocalDateTime time, Centre centre, People people, AppointmentStatus appointmentStatus) {
+        this.appointmentId = UUID.randomUUID();
         this.time = time;
         this.centre = centre;
         this.people = people;
         this.appointmentStatus = appointmentStatus;
+    }
+
+    public UUID getAppointmentId() {
+        return appointmentId;
     }
 
     public LocalDateTime getTime() {
@@ -56,10 +69,38 @@ public class Appointment {
         this.appointmentStatus = appointmentStatus;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
 
-    enum AppointmentStatus {
-        PENDING_CONFIRMATION,
-        CONFIRMED,
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Appointment other = (Appointment) obj;
+        if (!Objects.equals(this.appointmentId, other.appointmentId)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public UUID getKey() {
+        return appointmentId;
+    }
+
+
+    public enum AppointmentStatus {
+        PENDING,
         CANCELED,
         COMPLETED
     }

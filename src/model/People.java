@@ -7,8 +7,8 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import report.Generatable;
+import report.ReportGenerator;
 
 /**
  *
@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
  */
 public class People extends User implements Generatable {
 
-    private static final Logger logger = LogManager.getLogger(People.class);
     private PeopleType peopleType;
     private VaccincationStatus vaccinationStatus;
     private List<Vaccination> vaccinations;
@@ -41,6 +40,12 @@ public class People extends User implements Generatable {
         this.address = address;
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return "People{" + "userId=" + this.getUserId().toString() + ", name=" + this.getName() + ", peopleType=" + peopleType + ", vaccinationStatus=" + vaccinationStatus + ", vaccinations=" + vaccinations + ", dob=" + dob + ", gender=" + gender + ", peopleId=" + peopleId + ", address=" + address + ", country=" + country + '}';
+    }
+
 
     public List<Vaccination> getVaccinations() {
         return vaccinations;
@@ -107,9 +112,14 @@ public class People extends User implements Generatable {
     }
 
     @Override
+    public String getGenerateTitle() {
+        return "Personal Information";
+    }
+
+    @Override
     public String getGenerateContent() {
-        StringBuilder strb = new StringBuilder("Personal Information");
-        StringBuilder seperator = new StringBuilder("===========================================================");
+        StringBuilder strb = new StringBuilder();
+        String lineBreak = ReportGenerator.LINE_SEPERATOR;
         String nationality = "";
 
         if (this.getPeopleType() == PeopleType.CITIZEN) {
@@ -120,40 +130,42 @@ public class People extends User implements Generatable {
             nationality = "Non Malaysian";
         }
 
-        strb.append(System.getProperty("line.separator"));
-        strb.append(seperator);
-        strb.append(System.getProperty("line.separator"));
         strb.append("Name: \t");
         strb.append(this.getName());
-        strb.append(System.getProperty("line.separator"));
+        strb.append(lineBreak);
         strb.append("Nationality: \t");
         strb.append(nationality);
-        strb.append(System.getProperty("line.separator"));
+        strb.append(lineBreak);
         strb.append("Country: \t");
         strb.append(this.getCountry());
-        strb.append(System.getProperty("line.separator"));
+        strb.append(lineBreak);
         strb.append("Identity No.: \t");
         strb.append(this.getPeopleId());
-        strb.append(System.getProperty("line.separator"));
+        strb.append(lineBreak);
         strb.append("Date of Birth: \t");
         strb.append(this.getDob());
-        strb.append(System.getProperty("line.separator"));
 
         return strb.toString();
     }
 
-    enum PeopleType {
+    public enum PeopleType {
         CITIZEN,
         NON_CITIZEN
     }
 
-    enum VaccincationStatus {
+    public static enum VaccincationStatus {
         UNVACINNATED,
         PARTIALLY_VACCINATED,
-        FULLY_VACCINATED
+        FULLY_VACCINATED;
+
+        private static VaccincationStatus[] vals = values();
+
+        public VaccincationStatus next() {
+            return vals[(this.ordinal() + 1) % vals.length];
+        }
     }
 
-    enum Gender {
+    public enum Gender {
         FEMALE,
         MALE
     }

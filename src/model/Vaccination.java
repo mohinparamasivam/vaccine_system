@@ -5,21 +5,38 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
+import report.Generatable;
+import report.ReportGenerator;
 
 /**
  *
  * @author howar
  */
-public class Vaccination implements Generatable {
+public class Vaccination implements Generatable, Model {
 
+    private final UUID vaccinationId;
     private LocalDateTime time;
     private Centre centre;
     private VaccineSupply supply;
 
     public Vaccination(LocalDateTime time, Centre centre, VaccineSupply supply) {
+        this.vaccinationId = UUID.randomUUID();
         this.time = time;
         this.centre = centre;
         this.supply = supply;
+    }
+
+    @Override
+    public String toString() {
+        return "Vaccination{" + "vaccinationId=" + vaccinationId + ", time=" + time + ", centre=" + centre + ", supply=" + supply + '}';
+    }
+
+
+
+    @Override
+    public UUID getKey() {
+        return vaccinationId;
     }
 
     public LocalDateTime getTime() {
@@ -47,27 +64,30 @@ public class Vaccination implements Generatable {
     }
 
     @Override
+    public String getGenerateTitle() {
+        return "Vaccination";
+    }
+
+    @Override
     public String getGenerateContent() {
-        StringBuilder strb = new StringBuilder("Vaccination");
-        StringBuilder seperator = new StringBuilder("===========================================================");
-        strb.append(System.getProperty("line.separator"));
-        strb.append(seperator);
-        strb.append(System.getProperty("line.separator"));
+        StringBuilder strb = new StringBuilder();
+        String lineBreak = ReportGenerator.LINE_SEPERATOR;
+
+        strb.append(lineBreak);
         strb.append("Date of Vaccination: \t");
         strb.append(this.time);
-        strb.append(System.getProperty("line.separator"));
+        strb.append(lineBreak);
         strb.append("Vaccination Centre: \t");
         strb.append(this.centre.getName());
-        strb.append(System.getProperty("line.separator"));
+        strb.append(lineBreak);
         strb.append("Vaccine Name: \t");
         strb.append(this.supply.getVaccine().getName());
-        strb.append(System.getProperty("line.separator"));
+        strb.append(lineBreak);
         strb.append("Vaccine Supplier: \t");
         strb.append(this.supply.getSupplier());
-        strb.append(System.getProperty("line.separator"));
+        strb.append(lineBreak);
         strb.append("Batch No.: \t");
         strb.append(this.supply.getBatchNo());
-        strb.append(System.getProperty("line.separator"));
 
         return strb.toString();
     }

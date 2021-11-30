@@ -6,13 +6,15 @@ package model;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
  * @author howar
  */
-public class Centre {
+public class Centre implements Model {
 
+    private final UUID centreId;
     private List<VaccineSupply> vaccineSupplies;
     private String name;
     private int countOfBooth;
@@ -20,11 +22,22 @@ public class Centre {
     private LocalTime closeTime;
 
     public Centre(List<VaccineSupply> vaccineSupplies, String name, int countOfBooth, LocalTime openTime, LocalTime closeTime) {
+        this.centreId = UUID.randomUUID();
         this.vaccineSupplies = vaccineSupplies;
         this.name = name;
         this.countOfBooth = countOfBooth;
         this.openTime = openTime;
         this.closeTime = closeTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Centre{" + "centreId=" + centreId + ", vaccineSupplies=" + vaccineSupplies + ", name=" + name + ", countOfBooth=" + countOfBooth + ", openTime=" + openTime + ", closeTime=" + closeTime + '}';
+    }
+
+
+    public UUID getCentreId() {
+        return centreId;
     }
 
     public List<VaccineSupply> getVaccineSupplies() {
@@ -67,5 +80,9 @@ public class Centre {
         this.closeTime = closeTime;
     }
 
+    @Override
+    public UUID getKey() {
+        return centreId;
+    }
 
 }

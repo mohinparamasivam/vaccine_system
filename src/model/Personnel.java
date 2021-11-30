@@ -4,19 +4,20 @@
  */
 package model;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 /**
  *
  * @author howar
  */
 public class Personnel extends User {
-    private static final Logger logger = LogManager.getLogger(Personnel.class);
 
     public Personnel(String username, String name, String password) {
         super(username, name, password);
-        logger.info("Personnel created successfully: {}", this.getName());
     }
+
+    @Override
+    public String toString() {
+        return "Personnel{" + "userId=" + this.getUserId() + ", username=" + this.getUsername() + ", name=" + this.getName() + ", password=" + this.getPassword() + '}';
+    }
+
 
 }

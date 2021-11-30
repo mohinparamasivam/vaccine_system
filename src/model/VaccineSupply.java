@@ -5,23 +5,27 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
  * @author howar
  */
-public class VaccineSupply {
+public class VaccineSupply implements Model {
 
+    private final UUID supplyId;
     private String batchNo;
     private LocalDate supplyDate;
     private Vaccine vaccine;
     private String supplier;
     private int supplyQuantity;
     private int availableQuantity;
-    private List<People> accesiblePeopleTypes;
+    private List<People.PeopleType> accesiblePeopleTypes;
 
-    public VaccineSupply(String batchNo, LocalDate supplyDate, Vaccine vaccine, String supplier, int supplyQuantity, int availableQuantity, List<People> accesiblePeopleTypes) {
+    public VaccineSupply(String batchNo, LocalDate supplyDate, Vaccine vaccine, String supplier, int supplyQuantity, int availableQuantity, List<People.PeopleType> accesiblePeopleTypes) {
+        this.supplyId = UUID.randomUUID();
         this.batchNo = batchNo;
         this.supplyDate = supplyDate;
         this.vaccine = vaccine;
@@ -29,6 +33,39 @@ public class VaccineSupply {
         this.supplyQuantity = supplyQuantity;
         this.availableQuantity = availableQuantity;
         this.accesiblePeopleTypes = accesiblePeopleTypes;
+    }
+
+    public static List<People.PeopleType> getAccessOnlyCitizen() {
+        List<People.PeopleType> onlyCitizen = new ArrayList<>();
+        onlyCitizen.add(People.PeopleType.CITIZEN);
+        return onlyCitizen;
+    }
+
+    public static List<People.PeopleType> getAccessOnlyNonCitizen() {
+        List<People.PeopleType> onlyNonCitizen = new ArrayList<>();
+        onlyNonCitizen.add(People.PeopleType.NON_CITIZEN);
+        return onlyNonCitizen;
+    }
+
+    public static List<People.PeopleType> getAccessCitizenAndNonCitizen() {
+        List<People.PeopleType> citizenAndNonCitizen = new ArrayList<>();
+        citizenAndNonCitizen.add(People.PeopleType.CITIZEN);
+        citizenAndNonCitizen.add(People.PeopleType.NON_CITIZEN);
+        return citizenAndNonCitizen;
+    }
+
+    @Override
+    public String toString() {
+        return "VaccineSupply{" + "supplyId=" + supplyId + ", batchNo=" + batchNo + ", supplyDate=" + supplyDate + ", vaccine=" + vaccine + ", supplier=" + supplier + ", supplyQuantity=" + supplyQuantity + ", availableQuantity=" + availableQuantity + ", accesiblePeopleTypes=" + accesiblePeopleTypes + '}';
+    }
+
+    @Override
+    public UUID getKey() {
+        return supplyId;
+    }
+
+    public UUID getSupplyId() {
+        return supplyId;
     }
 
     public String getBatchNo() {
@@ -79,11 +116,11 @@ public class VaccineSupply {
         this.availableQuantity = availableQuantity;
     }
 
-    public List<People> getAccesiblePeopleTypes() {
+    public List<People.PeopleType> getAccesiblePeopleTypes() {
         return accesiblePeopleTypes;
     }
 
-    public void setAccesiblePeopleTypes(List<People> accesiblePeopleTypes) {
+    public void setAccesiblePeopleTypes(List<People.PeopleType> accesiblePeopleTypes) {
         this.accesiblePeopleTypes = accesiblePeopleTypes;
     }
 
