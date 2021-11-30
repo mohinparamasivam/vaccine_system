@@ -6,8 +6,6 @@ package DAO;
 
 import java.util.List;
 import java.util.UUID;
-import model.People;
-import model.Personnel;
 import model.User;
 
 /**
@@ -18,14 +16,18 @@ public interface UserDAO {
 
     public List<User> all();
 
+    public List<User> allPersonnelUsers();
+
+    public List<User> allPeopleUsers();
+
     public User get(UUID userId);
 
     public void updateUserPassword(UUID userId, String newPassword);
 
+    public boolean canPeopleLogin(String username, String password);
+
+    public boolean canPersonnelLogin(String username, String password);
+
     public boolean canLogin(String username, String password);
-
-    public Personnel getPersonnel(UUID userId);
-
-    public People getPeople(UUID userId);
 
 }

@@ -77,12 +77,53 @@ public class FileUserDAO implements UserDAO {
     }
 
     @Override
-    public boolean canLogin(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<User> allPersonnelUsers() {
+        FilePersonnelDAO personnelDao = FilePersonnelDAO.getInstance();
+
+        return this.getUsersFromSubClassList(personnelDao.all());
     }
 
     @Override
-    public Personnel getPersonnel(UUID userId) {
+    public List<User> allPeopleUsers() {
+        FilePeopleDAO peopleDao = FilePeopleDAO.getInstance();
+        return this.getUsersFromSubClassList(peopleDao.all());
+    }
+
+
+    @Override
+    public boolean canLogin(String username, String password) {
+        List<User> users = this.all();
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canPeopleLogin(String username, String password) {
+        List<User> users = this.allPeopleUsers();
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canPersonnelLogin(String username, String password) {
+        List<User> users = this.allPersonnelUsers();
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Personnel getPersonnel(UUID userId) {
         FilePersonnelDAO personnelDao = FilePersonnelDAO.getInstance();
         for (Personnel personnel : personnelDao.all()) {
             if (personnel.getKey().equals(userId)) {
@@ -92,8 +133,7 @@ public class FileUserDAO implements UserDAO {
         return null;
     }
 
-    @Override
-    public People getPeople(UUID userId) {
+    private People getPeople(UUID userId) {
         FilePeopleDAO peopleDao = FilePeopleDAO.getInstance();
         for (People people : peopleDao.all()) {
             if (people.getKey().equals(userId)) {

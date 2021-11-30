@@ -43,7 +43,7 @@ public class People extends User implements Generatable {
 
     @Override
     public String toString() {
-        return "People{" + "userId=" + this.getUserId().toString() + ", name=" + this.getName() + ", peopleType=" + peopleType + ", vaccinationStatus=" + vaccinationStatus + ", vaccinations=" + vaccinations + ", dob=" + dob + ", gender=" + gender + ", peopleId=" + peopleId + ", address=" + address + ", country=" + country + '}';
+        return "People{" + "userId=" + this.getUserId().toString() + ", username=" + this.getUsername() + ", name=" + this.getName() + ", password=" + this.getPassword() + ", peopleType=" + peopleType + ", vaccinationStatus=" + vaccinationStatus + ", vaccinations=" + vaccinations + ", dob=" + dob + ", gender=" + gender + ", peopleId=" + peopleId + ", address=" + address + ", country=" + country + '}';
     }
 
 

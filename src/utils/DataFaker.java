@@ -50,7 +50,9 @@ public class DataFaker {
         DataFaker.resetVaccine();
         DataFaker.resetVaccineSupply();
         DataFaker.resetAppointmentAndVaccination();
+    }
 
+    public static void printAllData() {
         List<FileBaseDAO> list = new ArrayList<>();
         list.add(FilePeopleDAO.getInstance());
         list.add(FilePersonnelDAO.getInstance());
