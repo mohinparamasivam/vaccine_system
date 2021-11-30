@@ -143,7 +143,7 @@ public class People_Records_Main extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        Staff_Dashboard hframe = new Staff_Dashboard();
+        Personnel_Dashboard hframe = new Personnel_Dashboard();
         hframe.setVisible(true);
         this.dispose();
         

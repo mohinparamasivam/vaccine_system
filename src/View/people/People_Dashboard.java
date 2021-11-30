@@ -5,6 +5,9 @@
  */
 package View.people;
 
+import View.LoginPresenter;
+import View.LoginView;
+
 /**
  *
  * @author Mohin Paramasivam
@@ -145,7 +148,8 @@ public class People_Dashboard extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Login hframe = new Login();
+        LoginView hframe = new LoginView();
+        LoginPresenter loginPresenter = new LoginPresenter(hframe);
         hframe.setVisible(true);
         this.dispose();
         

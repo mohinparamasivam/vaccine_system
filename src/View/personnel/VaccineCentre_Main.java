@@ -149,7 +149,7 @@ public class VaccineCentre_Main extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        Staff_Dashboard hframe = new Staff_Dashboard();
+        Personnel_Dashboard hframe = new Personnel_Dashboard();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
