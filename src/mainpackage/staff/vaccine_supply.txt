@@ -1,0 +1,2 @@
+KPJ:0:0:0
+Salam Hospital:10:100:20
