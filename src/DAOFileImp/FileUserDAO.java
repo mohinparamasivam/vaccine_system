@@ -102,6 +102,31 @@ public class FileUserDAO implements UserDAO {
     }
 
     @Override
+    public Personnel getPersonnelByUsernameAndPassword(String username, String password) {
+        FilePersonnelDAO personnelDao = FilePersonnelDAO.getInstance();
+        List<Personnel> users = personnelDao.all();
+        for (Personnel user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public People getPeopleByUsernameAndPassword(String username, String password) {
+        FilePeopleDAO peopleDao = FilePeopleDAO.getInstance();
+        List<People> users = peopleDao.all();
+        for (People user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+
+    @Override
     public boolean canPeopleLogin(String username, String password) {
         List<User> users = this.allPeopleUsers();
         for (User user : users) {

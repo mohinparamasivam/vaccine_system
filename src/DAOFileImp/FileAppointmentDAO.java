@@ -42,4 +42,14 @@ public class FileAppointmentDAO extends FileBaseDAO<Appointment> implements Appo
         });
         return apList;
     }
+
+    @Override
+    public List<Appointment> findAppointmentByPeopleName(String searchKey) {
+        List<Appointment> appointments = this.all();
+        List<Appointment> apList = new ArrayList<>();
+        appointments.stream().filter(appointment -> (appointment.getPeople().getName().toLowerCase().contains(searchKey.toLowerCase()))).forEachOrdered(appointment -> {
+            apList.add(appointment);
+        });
+        return apList;
+    }
 }

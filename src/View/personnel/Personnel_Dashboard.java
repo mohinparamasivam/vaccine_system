@@ -5,8 +5,11 @@
  */
 package View.personnel;
 
+import DAO.PersonnelDAO;
+import DAOFileImp.FilePersonnelDAO;
 import View.LoginPresenter;
 import View.LoginView;
+import model.Personnel;
 
 
 /**
@@ -15,10 +18,24 @@ import View.LoginView;
  */
 public class Personnel_Dashboard extends javax.swing.JFrame {
 
+    static Personnel personnel;
+    final PersonnelDAO personnelDao = FilePersonnelDAO.getInstance();
+
     /**
      * Creates new form Staff_Dashboard
      */
     public Personnel_Dashboard() {
+        personnel = personnelDao.all().get(0);
+        this.setTitle("Welcome! " + personnel.getName());
+        initComponents();
+    }
+
+    /**
+     * Creates new form Staff_Dashboard
+     */
+    public Personnel_Dashboard(Personnel personnel) {
+        personnel = personnel;
+        this.setTitle("Welcome! " + personnel.getName());
         initComponents();
     }
 
@@ -74,7 +91,7 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Login");
+        jButton5.setText("Logout");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -190,7 +207,7 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Personnel_Dashboard().setVisible(true);
+                new Personnel_Dashboard(FilePersonnelDAO.getInstance().all().get(0)).setVisible(true);
             }
         });
     }

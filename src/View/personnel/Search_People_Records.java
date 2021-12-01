@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -38,7 +37,7 @@ public class Search_People_Records extends javax.swing.JFrame {
      private void CreateColumns(){
                 //GET TABLE MODEL
                
-                dm=(DefaultTableModel) jTable2.getModel();
+         dm = (DefaultTableModel) jTable2.getModel();
                 
                 //ADD COLUMNS
                 dm.addColumn("               IC/Passport");

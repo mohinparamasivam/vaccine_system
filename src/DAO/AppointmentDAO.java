@@ -15,6 +15,6 @@ public interface AppointmentDAO extends BaseRootDAO<Appointment> {
 
     public List<Appointment> findAppointmentByPeopleNameOrCentreName(String searchKey);
 
-
+    public List<Appointment> findAppointmentByPeopleName(String searchKey);
 
 }

@@ -59,7 +59,8 @@ public class LoginPresenter {
             if (canLogin) {
                 JOptionPane.showMessageDialog(null, "Valid Credential");
                 if (isPersonnelLogin) {
-                    Personnel_Dashboard personnel_Dashboard = new Personnel_Dashboard();
+
+                    Personnel_Dashboard personnel_Dashboard = new Personnel_Dashboard(userDao.getPersonnelByUsernameAndPassword(username, password));
                     personnel_Dashboard.setVisible(true);
                     view.dispose();
                 } else if (isPeopleLogin) {
