@@ -4,6 +4,7 @@
 package utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.regex.Pattern;
@@ -86,12 +87,16 @@ public class Validator {
     }
 
     public static boolean isDateBeforeNow(LocalDate date) {
-
         return date.isBefore(LocalDate.now());
     }
 
+    public static boolean isDateTimeBeforeNow(LocalDateTime dateTime) {
+        return dateTime.isBefore(LocalDateTime.now());
+    }
+
+
     public static boolean isValidAge(int age) {
-        return age < 120;
+        return age < 120 && age > 0;
     }
 
     public static boolean isWords(String txt) {

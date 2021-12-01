@@ -102,7 +102,13 @@ public class Appointment implements Model {
     public enum AppointmentStatus {
         PENDING,
         CANCELED,
-        COMPLETED
+        COMPLETED;
+
+        @Override
+        public String toString() {
+            return utils.Util.capitalizeFirstLetter(this.name());
+        }
+
     }
 
 

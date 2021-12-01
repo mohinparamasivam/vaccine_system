@@ -150,7 +150,7 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        People_Appointments_Main hframe = new People_Appointments_Main();
+        Appointments_Main hframe = new Appointments_Main();
         hframe.setVisible(true);
         this.dispose();
         

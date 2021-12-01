@@ -9,6 +9,7 @@ import DAO.PeopleDAO;
 import DAOFileImp.FilePeopleDAO;
 import java.util.UUID;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import model.People;
+import utils.Util;
 
 /**
  *
@@ -95,6 +97,7 @@ public class People_Records_Search extends javax.swing.JFrame {
         lblSearch = new javax.swing.JLabel();
         btnModify = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,8 +122,9 @@ public class People_Records_Search extends javax.swing.JFrame {
         public void valueChanged(ListSelectionEvent event) {
             if(tblPeople.getSelectedRowCount() != 0 ) {
                 btnModify.setEnabled(true);
+                btnDelete.setEnabled(true);
             }else {
-
+                btnDelete.setEnabled(false);
                 btnModify.setEnabled(false);
             }
         }
@@ -154,6 +158,14 @@ public class People_Records_Search extends javax.swing.JFrame {
         }
     });
 
+    btnDelete.setText("Delete");
+    btnDelete.setEnabled(false);
+    btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnDeleteActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -176,6 +188,8 @@ public class People_Records_Search extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnBack)
+                                    .addGap(137, 137, 137)
+                                    .addComponent(btnDelete)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnModify))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,7 +209,8 @@ public class People_Records_Search extends javax.swing.JFrame {
             .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(21, 21, 21))
     );
 
@@ -223,6 +238,13 @@ public class People_Records_Search extends javax.swing.JFrame {
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        String userKey = tblPeople.getModel().getValueAt(tblPeople.getSelectedRow(), 0).toString();
+        peopleDao.delete(UUID.fromString(userKey));
+        JOptionPane.showMessageDialog(null, "Deleted successfully!");
+        initPeopleTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +284,7 @@ public class People_Records_Search extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnModify;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSearch;
@@ -271,8 +294,13 @@ public class People_Records_Search extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initPeopleTable() {
+        DefaultTableModel model = (DefaultTableModel) tblPeople.getModel();
+        Util.emptyTableModel(model);
         for (People people : peopleDao.all()) {
             populatePeople(people);
         }
+        btnDelete.setEnabled(false);
+        btnModify.setEnabled(false);
     }
+
 }
