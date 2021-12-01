@@ -5,8 +5,14 @@
  */
 package View.personnel;
 
+import DAO.PeopleDAO;
+import DAOFileImp.FilePeopleDAO;
+import java.time.LocalDate;
+import java.util.UUID;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import model.People;
+import utils.Validator;
 
 /**
  *
@@ -16,12 +22,16 @@ public class People_Record_Modify extends javax.swing.JFrame {
 
     private ButtonGroup bg = new ButtonGroup();
     private People people;
+    private PeopleDAO peopleDao = FilePeopleDAO.getInstance();
 
     /**
      * Creates new form Register
      */
     public People_Record_Modify() {
+        this.people = peopleDao.all().get(0);
+        this.setTitle(people.getName());
         initComponents();
+        assignFieldValues();
     }
 
     /**
@@ -31,6 +41,7 @@ public class People_Record_Modify extends javax.swing.JFrame {
         this.people = people;
         this.setTitle(people.getName());
         initComponents();
+        assignFieldValues();
     }
 
     /**
@@ -42,6 +53,8 @@ public class People_Record_Modify extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupCitizenship = new javax.swing.ButtonGroup();
+        btnGroupGender = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -50,20 +63,28 @@ public class People_Record_Modify extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPeopleId = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtAge = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtContact = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        txtPassword = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAddress = new javax.swing.JTextArea();
         txtCountry = new javax.swing.JTextField();
         lblCountry = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        rbtnFemale = new javax.swing.JRadioButton();
+        rbtnMale = new javax.swing.JRadioButton();
+        datePickerDob = new com.github.lgooddatepicker.components.DatePicker();
+        txtPeopleKey = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +94,7 @@ public class People_Record_Modify extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Citizenship :");
 
+        btnGroupCitizenship.add(rbtnMalaysian);
         rbtnMalaysian.setSelected(true);
         rbtnMalaysian.setText("Malaysian");
         rbtnMalaysian.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +103,7 @@ public class People_Record_Modify extends javax.swing.JFrame {
             }
         });
 
+        btnGroupCitizenship.add(rbtnForeigner);
         rbtnForeigner.setText("Foreigner");
         rbtnForeigner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +113,7 @@ public class People_Record_Modify extends javax.swing.JFrame {
 
         jLabel4.setText("IC : ");
 
-        jLabel5.setText("Name : ");
+        jLabel5.setText("Date of birth:");
 
         jLabel6.setText("Age : ");
 
@@ -98,20 +121,17 @@ public class People_Record_Modify extends javax.swing.JFrame {
 
         jLabel8.setText("Contact Number : ");
 
-        jLabel9.setText("Password : ");
-
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
-            }
-        });
-
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
             }
         });
 
@@ -127,6 +147,35 @@ public class People_Record_Modify extends javax.swing.JFrame {
 
         lblCountry.setText("Country:");
 
+        jLabel10.setText("Name:");
+
+        jLabel11.setText("Username:");
+
+        jLabel12.setText("Password:");
+
+        jLabel13.setText("Gender:");
+
+        btnGroupGender.add(rbtnFemale);
+        rbtnFemale.setText("Female");
+
+        btnGroupGender.add(rbtnMale);
+        rbtnMale.setText("Male");
+        rbtnMale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnMaleActionPerformed(evt);
+            }
+        });
+
+        txtPeopleKey.setEditable(false);
+        txtPeopleKey.setText("asdasd");
+        txtPeopleKey.setOpaque(true);
+        txtPeopleKey.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPeopleKeyActionPerformed(evt);
+            }
+        });
+        txtPeopleKey.setVisible(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,50 +183,65 @@ public class People_Record_Modify extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnBack)
-                            .addGap(276, 276, 276)
-                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel8)
-                                        .addComponent(jLabel9)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel6)
-                                        .addComponent(lblCountry))
-                                    .addGap(24, 24, 24))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(120, 120, 120)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtName)
-                                .addComponent(txtAge)
-                                .addComponent(txtContact)
-                                .addComponent(txtPassword)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(33, 33, 33)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(rbtnMalaysian)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rbtnForeigner)
-                                    .addGap(34, 34, 34))
-                                .addComponent(txtCountry)
-                                .addComponent(txtPeopleId)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 20, Short.MAX_VALUE)
+                        .addComponent(btnBack)
+                        .addGap(276, 276, 276)
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel2)
+                            .addComponent(lblCountry))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbtnMale, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rbtnFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13))
+                            .addComponent(txtCountry)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(txtPeopleKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(rbtnMalaysian)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rbtnForeigner)
+                                .addGap(34, 34, 34))
+                            .addComponent(txtPeopleId)
+                            .addComponent(txtUsername)
+                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtPassword)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                            .addComponent(datePickerDob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPeopleKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -185,78 +249,86 @@ public class People_Record_Modify extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(rbtnMalaysian)
                     .addComponent(rbtnForeigner))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPeopleId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(datePickerDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(rbtnFemale)
+                    .addComponent(rbtnMale))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCountry))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
-                        .addComponent(lblCountry)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(105, 105, 105)
-                                .addComponent(jLabel7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBack)
-                            .addComponent(btnSubmit)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jLabel7)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSubmit)
+                    .addComponent(btnBack))
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtnMalaysianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMalaysianActionPerformed
-        // TODO add your handling code here:
-        bg.add(rbtnMalaysian);
-        bg.add(rbtnForeigner);
-        
         if (rbtnMalaysian.isSelected()) {
+            txtCountry.setEnabled(true);
+            txtCountry.setText("Malaysia");
+            txtCountry.setEnabled(false);
             jLabel4.setText("IC : ");
         }
-        
+
         if (rbtnForeigner.isSelected()) {
             jLabel4.setText("Passport : ");
-            
-    }                                    
+            txtCountry.setEnabled(true);
+        }
     }//GEN-LAST:event_rbtnMalaysianActionPerformed
 
     private void rbtnForeignerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnForeignerActionPerformed
-        // TODO add your handling code here:
-        bg.add(rbtnMalaysian);
-        bg.add(rbtnForeigner);
-        
+
         if (rbtnMalaysian.isSelected()) {
+            txtCountry.setEnabled(true);
+            txtCountry.setText("Malaysia");
+            txtCountry.setEnabled(false);
             jLabel4.setText("IC : ");
         }
-        
+
         if (rbtnForeigner.isSelected()) {
             jLabel4.setText("Passport : ");
-            
-    }                                    
+            txtCountry.setEnabled(true);
+        }
+
+
     }//GEN-LAST:event_rbtnForeignerActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -266,13 +338,79 @@ public class People_Record_Modify extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
     private void txtCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCountryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCountryActionPerformed
+
+    private void rbtnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnMaleActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+
+        boolean isCitizen = rbtnMalaysian.isSelected();
+        UUID key = UUID.fromString(txtPeopleKey.getText());
+        String name = txtName.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        String peopleId = txtPeopleId.getText();
+        LocalDate dob = datePickerDob.getDate();
+        int age = (int) txtAge.getValue();
+        String contact = txtContact.getText();
+        boolean isMale = rbtnMale.isSelected();
+        String country = txtCountry.getText();
+        String address = txtAddress.getText();
+
+        StringBuilder strbError = new StringBuilder();
+
+        if (!Validator.isValidName(name)) {
+            strbError.append("Invalid name. \n");
+        }
+
+        if (isCitizen && !Validator.isValidNRIC(peopleId)) {
+            strbError.append("Invalid NRIC number. (Format: yymmddXXXXXX)\n");
+        }
+
+        if (!Validator.isDateBeforeNow(dob)) {
+            strbError.append("Invalid dob. \n");
+        }
+
+        if (!Validator.isValidAge(age)) {
+            strbError.append("Invalid age. \n");
+        }
+
+        if (!Validator.isWords(country)) {
+            strbError.append("Invalid country. \n");
+        }
+
+        if (strbError.length() == 0) {
+            People peopleTemp = peopleDao.get(key);
+            peopleTemp.setPeopleType(isCitizen ? People.PeopleType.CITIZEN : People.PeopleType.NON_CITIZEN);
+            peopleTemp.setName(name);
+            peopleTemp.setUsername(username);
+            peopleTemp.setPassword(password);
+            peopleTemp.setPeopleId(peopleId);
+            peopleTemp.setDob(dob);
+            peopleTemp.setAge(age);
+            peopleTemp.setContact(contact);
+            peopleTemp.setGender(isMale ? People.Gender.MALE : People.Gender.FEMALE);
+            peopleTemp.setCountry(country);
+            peopleTemp.setAddress(address);
+
+            peopleDao.update(key, peopleTemp);
+            JOptionPane.showMessageDialog(null, "Updated successfully!");
+            People_Records_Search pSearch = new People_Records_Search();
+            pSearch.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, strbError.toString(), "Invalid Input!", JOptionPane.ERROR_MESSAGE);
+        }
+					
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void txtPeopleKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeopleKeyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPeopleKeyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,8 +450,15 @@ public class People_Record_Modify extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.ButtonGroup btnGroupCitizenship;
+    private javax.swing.ButtonGroup btnGroupGender;
     private javax.swing.JButton btnSubmit;
+    private com.github.lgooddatepicker.components.DatePicker datePickerDob;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -321,11 +466,12 @@ public class People_Record_Modify extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCountry;
+    private javax.swing.JRadioButton rbtnFemale;
     private javax.swing.JRadioButton rbtnForeigner;
     private javax.swing.JRadioButton rbtnMalaysian;
+    private javax.swing.JRadioButton rbtnMale;
     private javax.swing.JTextArea txtAddress;
     private javax.swing.JSpinner txtAge;
     private javax.swing.JTextField txtContact;
@@ -333,5 +479,32 @@ public class People_Record_Modify extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPeopleId;
+    private javax.swing.JTextField txtPeopleKey;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void assignFieldValues() {
+        if(people.getPeopleType() == People.PeopleType.CITIZEN){
+            rbtnMalaysian.setSelected(true);
+            txtCountry.setEnabled(false);
+        }else{
+            rbtnForeigner.setSelected(true);
+            txtCountry.setEnabled(true);
+        }
+        txtPeopleKey.setText(people.getKey().toString());
+        txtName.setText(people.getName());
+        txtUsername.setText(people.getUsername());
+        txtPassword.setText(people.getPassword());
+        txtPeopleId.setText(people.getPeopleId());
+        datePickerDob.setDate(people.getDob());
+        txtAge.setValue(people.getAge());
+        txtContact.setText(people.getContact());
+        if(people.getGender()== People.Gender.MALE){
+            rbtnMale.setSelected(true);
+        }else{
+            rbtnFemale.setSelected(true);
+        }
+        txtCountry.setText(people.getCountry());
+        txtAddress.setText(people.getAddress());
+    }
 }
