@@ -29,7 +29,7 @@
         - delete object by unique key from data file
     - `deleteAll();`
         - clear the data file completely
-- to initialize a DAO class, just use `<ModelDAO> sampleDao = <FileModelDAO>.getInstance(); ` to:
+- to initialize a DAO class, just use `<ModelDAO> sampleDao = <FileModelDAO>.getInstance(); `
 - example:
 ```java
 
