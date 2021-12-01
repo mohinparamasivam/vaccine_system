@@ -108,7 +108,7 @@ public class People_Records_Main extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        Register_People hframe = new Register_People();
+        People_Register hframe = new People_Register();
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed

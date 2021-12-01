@@ -63,4 +63,17 @@ public class FilePeopleDAO extends FileBaseDAO<People> implements PeopleDAO {
         return ppList;
     }
 
+    @Override
+    public boolean isDuplicatedUsername(String username) {
+        List<People> peoples = this.all();
+        for (People people : peoples) {
+            if (people.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+
 }
