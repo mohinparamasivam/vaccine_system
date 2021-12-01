@@ -8,3 +8,5 @@ nbdist/
 .nb-gradle/
 
 logs/
+
+data/

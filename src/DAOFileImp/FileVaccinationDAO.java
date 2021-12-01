@@ -64,6 +64,12 @@ public class FileVaccinationDAO extends FileBaseDAO<Vaccination> implements Vacc
         }
 
         FilePeopleDAO.getInstance().update(people.getKey(), people);
+
+        //update the people with vaccination in appointment
+        appointment.setPeople(people);
+        FileAppointmentDAO.getInstance().update(appointment.getKey(), appointment);
+        logger.info("Set appointment people to people with vaccinations.");
+
     }
 
 
