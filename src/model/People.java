@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import report.Generatable;
 import report.ReportGenerator;
+import utils.Util;
 
 /**
  *
@@ -20,16 +21,18 @@ public class People extends User implements Generatable {
     private VaccincationStatus vaccinationStatus;
     private List<Vaccination> vaccinations;
     private LocalDate dob;
+    private int age;
+    private String contact;
     private Gender gender;
     private String peopleId;
     private String address;
     private String country;
 
-    public People(PeopleType peopleType, LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password) {
-        this(peopleType, VaccincationStatus.UNVACINNATED, new ArrayList<Vaccination>(), dob, gender, peopleId, address, country, username, name, password);
+    public People(PeopleType peopleType, LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password, int age, String contact) {
+        this(peopleType, VaccincationStatus.UNVACINNATED, new ArrayList<Vaccination>(), dob, gender, peopleId, address, country, username, name, password, age, contact);
     }
 
-    public People(PeopleType peopleType, VaccincationStatus vaccinationStatus, List<Vaccination> vaccinations, LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password) {
+    public People(PeopleType peopleType, VaccincationStatus vaccinationStatus, List<Vaccination> vaccinations, LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password, int age, String contact) {
         super(username, name, password);
         this.peopleType = peopleType;
         this.vaccinationStatus = vaccinationStatus;
@@ -39,6 +42,8 @@ public class People extends User implements Generatable {
         this.peopleId = peopleId;
         this.address = address;
         this.country = country;
+        this.age = age;
+        this.contact = contact;
     }
 
     @Override
@@ -111,6 +116,23 @@ public class People extends User implements Generatable {
         this.address = address;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+
     @Override
     public String getGenerateTitle() {
         return "Personal Information";
@@ -150,7 +172,13 @@ public class People extends User implements Generatable {
 
     public enum PeopleType {
         CITIZEN,
-        NON_CITIZEN
+        NON_CITIZEN;
+
+        @Override
+        public String toString() {
+            return Util.capitalizeFirstLetter(this.name());
+        }
+
     }
 
     public static enum VaccincationStatus {
@@ -163,10 +191,22 @@ public class People extends User implements Generatable {
         public VaccincationStatus next() {
             return vals[(this.ordinal() + 1) % vals.length];
         }
+
+        @Override
+        public String toString() {
+            return Util.capitalizeFirstLetter(this.name());
+        }
+
     }
 
     public enum Gender {
         FEMALE,
-        MALE
+        MALE;
+
+        @Override
+        public String toString() {
+            return Util.capitalizeFirstLetter(this.name());
+        }
+
     }
 }

@@ -13,12 +13,12 @@ import java.util.List;
  */
 public class NonCitizen extends People {
 
-    public NonCitizen(LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password) {
-        super(PeopleType.NON_CITIZEN, dob, gender, peopleId, address, country, username, name, password);
+    public NonCitizen(LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password, int age, String contact) {
+        super(PeopleType.NON_CITIZEN, dob, gender, peopleId, address, country, username, name, password, age, contact);
     }
 
-    public NonCitizen(PeopleType peopleType, VaccincationStatus vaccinationStatus, List<Vaccination> vaccinations, LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password) {
-        super(peopleType, vaccinationStatus, vaccinations, dob, gender, peopleId, address, country, username, name, password);
+    public NonCitizen(PeopleType peopleType, VaccincationStatus vaccinationStatus, List<Vaccination> vaccinations, LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password, int age, String contact) {
+        super(peopleType, vaccinationStatus, vaccinations, dob, gender, peopleId, address, country, username, name, password, age, contact);
     }
 
 }

@@ -91,7 +91,9 @@ public class DataFaker {
                     "Lot 123, Jalan Test Male " + ind,
                     "people_M" + ind,
                     mNames[i],
-                    "people");
+                    "people",
+                    25 + i,
+                    "011-111111" + ind);
             peopleDao.create(people);
         }
         //create 2 female citizen
@@ -102,7 +104,9 @@ public class DataFaker {
                     "Lot 456, Jalan Test Female " + ind,
                     "people_F" + ind,
                     mNames[i],
-                    "people");
+                    "people",
+                    30 + i,
+                    "012-222222" + ind);
             peopleDao.create(people);
         }
 
@@ -115,7 +119,9 @@ public class DataFaker {
                     countries[i],
                     "people_NCZ_M" + ind,
                     names[i],
-                    "people");
+                    "people",
+                    22 + i,
+                    "011-3333333" + ind);
             peopleDao.create(people);
         }
         //create 2 female non-citizen
@@ -127,7 +133,9 @@ public class DataFaker {
                     countries[i],
                     "people_NCZ_F" + ind,
                     names[i],
-                    "people");
+                    "people",
+                    40 + i,
+                    "011-4444444" + ind);
             peopleDao.create(people);
         }
     }
