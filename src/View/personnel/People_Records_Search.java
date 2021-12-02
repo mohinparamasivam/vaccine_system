@@ -55,6 +55,7 @@ public class People_Records_Search extends javax.swing.JFrame {
          dm.addColumn("Citizenship");
          dm.addColumn("Country");
          dm.addColumn("Vaccination Status");
+         dm.addColumn("Registration Status");
          TableColumnModel tcm = tblPeople.getColumnModel();
          tcm.removeColumn(tcm.getColumn(0)); //hide key
     }
@@ -69,7 +70,9 @@ public class People_Records_Search extends javax.swing.JFrame {
             people.getGender().toString(),
             people.getPeopleType().toString(),
             people.getCountry(),
-            people.getVaccinationStatus().toString()};
+            people.getVaccinationStatus().toString(),
+            people.getRegistrationStatus().toString()
+        };
          dm.addRow(rowData);
      }
      
@@ -171,29 +174,27 @@ public class People_Records_Search extends javax.swing.JFrame {
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 87, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(btnBack)
+                    .addGap(204, 204, 204)
+                    .addComponent(btnDelete)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnModify)))
+            .addGap(80, 80, 80))
+        .addGroup(layout.createSequentialGroup()
+            .addGap(193, 193, 193)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(135, 135, 135)
                     .addComponent(lblSearch)
                     .addGap(35, 35, 35)
                     .addComponent(txtSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(86, 86, 86)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(317, 317, 317))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnBack)
-                                    .addGap(137, 137, 137)
-                                    .addComponent(btnDelete)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnModify))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(80, 80, 80))))))
+                    .addGap(230, 230, 230)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

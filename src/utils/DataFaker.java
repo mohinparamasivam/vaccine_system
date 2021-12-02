@@ -145,7 +145,7 @@ public class DataFaker {
                     "people",
                     40 + i,
                     "011-4444444" + ind);
-            if (i == 0) { //set the first guy to registered
+            if (i == 2) { //set the first guy to registered
                 people.setRegistrationStatus(People.RegistrationStatus.REGISTERED);
             }
             peopleDao.create(people);
