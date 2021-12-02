@@ -12,18 +12,9 @@ import java.util.List;
  */
 public class PdfReportGenerator extends FileReportGenerator {
 
-    public PdfReportGenerator(String filePath, List<? extends Generatable> subjects) {
-        super(filePath, subjects);
+    public PdfReportGenerator(String fileName, List<? extends Generatable> subjects) {
+        super(fileName, subjects);
     }
-
-//    @Override
-//    public void saveReport() {
-//        try (PrintWriter writer = new PrintWriter(new File(this.getFilePath()));) {
-//            writer.write(this.getContent());
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @Override
     public void saveReport() {

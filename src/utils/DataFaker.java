@@ -226,7 +226,7 @@ public class DataFaker {
                     100,
                     access.get(i));
             vsSupplies.add(vs);
-            vsDao.create(vs);
+            vsDao.create(vs, centres.get(0));
         }
         centres.get(0).setVaccineSupplies(new ArrayList<VaccineSupply>(vsSupplies));
 
@@ -242,7 +242,7 @@ public class DataFaker {
                     80 + i * 10,
                     access.get(0));
             vsSupplies.add(vs);
-            vsDao.create(vs);
+            vsDao.create(vs, centres.get(1));
         }
         centres.get(1).setVaccineSupplies(new ArrayList<VaccineSupply>(vsSupplies));
 
@@ -258,7 +258,7 @@ public class DataFaker {
                     70 + i * 10,
                     access.get(1));
             vsSupplies.add(vs);
-            vsDao.create(vs);
+            vsDao.create(vs, centres.get(2));
         }
         centres.get(2).setVaccineSupplies(new ArrayList<VaccineSupply>(vsSupplies));
 

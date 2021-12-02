@@ -15,9 +15,10 @@ import java.util.List;
  */
 public class TxtReportGenerator extends FileReportGenerator {
 
-    public TxtReportGenerator(String filePath, List<? extends Generatable> subjects) {
-        super(filePath, subjects);
+    public TxtReportGenerator(String fileName, List<? extends Generatable> subjects) {
+        super(fileName, subjects);
     }
+
 
     @Override
     public void saveReport() {

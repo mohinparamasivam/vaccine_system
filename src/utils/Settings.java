@@ -60,6 +60,7 @@ public class Settings {
 
             // set the properties value
             prop.setProperty("db.folder", "data/");
+            prop.setProperty("report.folder", "report/");
 
             // save properties to project root folder
             prop.store(output, null);
