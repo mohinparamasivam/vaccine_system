@@ -73,7 +73,6 @@ public class Vaccination implements Generatable, Model {
         StringBuilder strb = new StringBuilder();
         String lineBreak = ReportGenerator.LINE_SEPERATOR;
 
-        strb.append(lineBreak);
         strb.append("Date of Vaccination: \t");
         strb.append(this.time);
         strb.append(lineBreak);

@@ -171,6 +171,16 @@ public class People extends User implements Generatable {
         return strb.toString();
     }
 
+    public List<? extends Generatable> getVaccinationReportGeneratables() {
+        List<Vaccination> vcns = this.getVaccinations();
+        List<Generatable> generatables = new ArrayList<>();
+        generatables.add(this);
+        for (Vaccination vcn : vcns) {
+            generatables.add((Generatable) vcn);
+        }
+        return generatables;
+    }
+
     public RegistrationStatus getRegistrationStatus() {
         return registrationStatus;
     }

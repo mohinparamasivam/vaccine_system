@@ -21,7 +21,9 @@ abstract class FileReportGenerator extends ReportGenerator {
         super(subjects);
         this.fileName = fileName;
         this.filePath = fileFolder + fileName;
+        utils.Util.createFolderIfNotExist(fileFolder);
     }
+
 
     public String getFilePath() {
         return filePath;

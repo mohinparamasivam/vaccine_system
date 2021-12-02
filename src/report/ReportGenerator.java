@@ -28,22 +28,29 @@ public class ReportGenerator {
         this.subjects = subjects;
     }
 
+    public void printReport() {
+        System.out.println(this.getRawContent());
+    }
+
     public String getRawContent() {
         StringBuilder strb = new StringBuilder();
 
         for (int i = 0; i < subjects.size(); i++) {
 
+            strb.append(HORIZONTAL_LINE);
             strb.append(LINE_SEPERATOR);
-            strb.append(subjects.get(i).getGenerateTitle());
+            strb.append("> " + subjects.get(i).getGenerateTitle());
             strb.append(LINE_SEPERATOR);
             strb.append(HORIZONTAL_LINE);
             strb.append(LINE_SEPERATOR);
+            strb.append(LINE_SEPERATOR);
             strb.append(subjects.get(i).getGenerateContent());
-            if (i != subjects.size() - 1) {
-                strb.append(LINE_SEPERATOR);
-                strb.append(HORIZONTAL_LINE);
-                strb.append(HORIZONTAL_LINE);
-                strb.append(LINE_SEPERATOR);
+            strb.append(LINE_SEPERATOR);
+            strb.append(LINE_SEPERATOR);
+            if (i == subjects.size() - 1) { //if it is the last item
+            strb.append(HORIZONTAL_LINE);
+            strb.append(LINE_SEPERATOR);
+            strb.append(LINE_SEPERATOR);
             }
         }
 
