@@ -31,14 +31,13 @@ public class People_Records_Search extends javax.swing.JFrame {
     String people_name;
     String people_password;
     String people_citizenship;
-    PeopleDAO peopleDao;
+    PeopleDAO peopleDao = FilePeopleDAO.getInstance();
      
             
     /**
      * Creates new form Search_People_Records
      */
     public People_Records_Search() {
-        peopleDao = FilePeopleDAO.getInstance();
         initComponents();
         CreateColumns();
         initPeopleTable();

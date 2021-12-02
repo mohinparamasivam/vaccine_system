@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 public class LoginPresenter {
     private final LoginView view;
     protected static final Logger logger = LogManager.getLogger();
+    UserDAO userDao = FileUserDAO.getInstance();
 
     public LoginPresenter(LoginView view) {
         this.view = view;
@@ -41,7 +42,6 @@ public class LoginPresenter {
         public void actionPerformed(ActionEvent e) {
             String username = view.txtUsername.getText();
             String password = new String(view.txtPassword.getPassword());
-            UserDAO userDao = FileUserDAO.getInstance();
             boolean canLogin = false;
             boolean isPeopleLogin = false;
             boolean isPersonnelLogin = false;
@@ -63,11 +63,13 @@ public class LoginPresenter {
                     Personnel_Dashboard personnel_Dashboard = new Personnel_Dashboard(userDao.getPersonnelByUsernameAndPassword(username, password));
                     personnel_Dashboard.setLocationRelativeTo(view);
                     personnel_Dashboard.setVisible(true);
+                    logger.info("Personnel " + userDao.getPersonnelByUsernameAndPassword(username, password).getName() + " logged in.");
                     view.dispose();
                 } else if (isPeopleLogin) {
                     People_Dashboard people_Dashboard = new People_Dashboard(userDao.getPeopleByUsernameAndPassword(username, password));
                     people_Dashboard.setLocationRelativeTo(view);
                     people_Dashboard.setVisible(true);
+                    logger.info("People " + userDao.getPeopleByUsernameAndPassword(username, password).getName() + " logged in.");
                     view.dispose();
                 }
             } else {

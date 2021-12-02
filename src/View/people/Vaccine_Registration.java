@@ -5,6 +5,7 @@
  */
 package View.people;
 
+import DAO.PeopleDAO;
 import DAOFileImp.FilePeopleDAO;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
@@ -18,7 +19,7 @@ public class Vaccine_Registration extends javax.swing.JFrame {
     private ButtonGroup bg_q1 = new ButtonGroup();
     private ButtonGroup bg_q2 = new ButtonGroup();
     private ButtonGroup bg_q3 = new ButtonGroup();
-
+    PeopleDAO peopleDao = FilePeopleDAO.getInstance();
     /**
      * Creates new form Vaccine_Registration
      */
@@ -246,7 +247,7 @@ public class Vaccine_Registration extends javax.swing.JFrame {
         }else{
             People people = People_Dashboard.getLoggedInPeople();
             people.setRegistrationStatus(People.RegistrationStatus.REGISTERED);
-            FilePeopleDAO.getInstance().update(people.getKey(), people);
+            peopleDao.update(people.getKey(), people);
             JOptionPane.showMessageDialog(null, "Successfully registered!");
             btnBackActionPerformed(evt);
         }

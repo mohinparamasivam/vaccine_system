@@ -212,7 +212,7 @@ public class Appointment_Schedule extends javax.swing.JFrame {
         for (Centre centre : centres) {
             centresName.add(centre.getName() + " | " + centre.getOpenTime().toString() + "-" + centre.getCloseTime().toString());
         }
-        for (People people : FilePeopleDAO.getInstance().getRegisteredPeople()) {
+        for (People people : peopleDao.getRegisteredPeople()) {
             peopleName.add(people.getName() + " | " + people.getAge() + " y/o | " + people.getPeopleType() + " | "+ people.getVaccinationStatus());
         }
 

@@ -28,6 +28,8 @@ import model.People;
  */
 public class Check_Appointment extends javax.swing.JFrame {
     JFrame jFrame_popup = new JFrame();
+        PeopleDAO peopledao = FilePeopleDAO.getInstance();
+       AppointmentDAO appointmentdao = FileAppointmentDAO.getInstance();
     /**
      * Creates new form Check_Appointment
      */
@@ -225,7 +227,6 @@ public class Check_Appointment extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String username_input = jTextField1.getText();
-        PeopleDAO peopledao = FilePeopleDAO.getInstance();
         List<People> people_list = peopledao.all();
         UUID people_key = null;
         for (People people : people_list ){
@@ -239,7 +240,6 @@ public class Check_Appointment extends javax.swing.JFrame {
        
        List<UUID> arr_appointment_id = new ArrayList<UUID>();
        
-       AppointmentDAO appointmentdao = FileAppointmentDAO.getInstance();
         List<Appointment> appointment_list = appointmentdao.all();
         
         for (Appointment appointments : appointment_list){
@@ -299,7 +299,6 @@ public class Check_Appointment extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String username_input = jTextField1.getText();
-        PeopleDAO peopledao = FilePeopleDAO.getInstance();
         List<People> people_list = peopledao.all();
         UUID people_key = null;
         for (People people : people_list ){
@@ -313,7 +312,6 @@ public class Check_Appointment extends javax.swing.JFrame {
        
        List<UUID> arr_appointment_id = new ArrayList<UUID>();
        
-       AppointmentDAO appointmentdao = FileAppointmentDAO.getInstance();
         List<Appointment> appointment_list = appointmentdao.all();
         
         for (Appointment appointments : appointment_list){
@@ -382,7 +380,6 @@ public class Check_Appointment extends javax.swing.JFrame {
         
         int value = dose2_date.compareTo(dose1_date);
         
-        AppointmentDAO appointmentdao = FileAppointmentDAO.getInstance();
         List<Appointment> appointment_list = appointmentdao.all();
         List<UUID> arr_appointment_id = new ArrayList<UUID>();
         
@@ -469,7 +466,6 @@ public class Check_Appointment extends javax.swing.JFrame {
          List<LocalDateTime> arr_appointment_date = new ArrayList<LocalDateTime>();
         
         
-         AppointmentDAO appointmentdao = FileAppointmentDAO.getInstance();
         List<Appointment> appointment_list = appointmentdao.all();
         
         String username_input = jTextField1.getText();

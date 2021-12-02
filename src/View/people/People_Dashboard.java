@@ -19,11 +19,12 @@ public class People_Dashboard extends javax.swing.JFrame {
 
     private static People loggedInPeople;
     private People people;
+    FilePeopleDAO peopleDao = FilePeopleDAO.getInstance();
     /**
      * Creates new form People_Dashboard
      */
     public People_Dashboard() {
-        loggedInPeople = FilePeopleDAO.getInstance().all().get(1);
+        loggedInPeople = peopleDao.all().get(1);
         initComponents();
     }
 
