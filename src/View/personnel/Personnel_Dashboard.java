@@ -25,8 +25,6 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
      * Creates new form Staff_Dashboard
      */
     public Personnel_Dashboard() {
-        personnel = personnelDao.all().get(0);
-        this.setTitle("Welcome! " + personnel.getName());
         initComponents();
     }
 
