@@ -43,6 +43,8 @@
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="btnModify" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -72,6 +74,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnBack" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="btnModify" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="btnDelete" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
           </Group>
@@ -103,7 +106,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tblPeople.getSelectionModel().addListSelectionListener(new ListSelectionListener(){&#xa;        public void valueChanged(ListSelectionEvent event) {&#xa;if(tblPeople.getSelectedRowCount() != 0 ) {&#xa;&#x9;&#x9;&#x9;&#x9;btnModify.setEnabled(true);&#xa;&#x9;&#x9;&#x9;&#x9;}else {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#xa;&#x9;&#x9;&#x9;&#x9;btnModify.setEnabled(false);&#xa;}&#xa;        }&#xa;    });"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tblPeople.getSelectionModel().addListSelectionListener(new ListSelectionListener(){&#xa;        public void valueChanged(ListSelectionEvent event) {&#xa;if(tblPeople.getSelectedRowCount() != 0 ) {&#xa;&#x9;&#x9;&#x9;&#x9;btnModify.setEnabled(true);&#xa;btnDelete.setEnabled(true);&#xa;&#x9;&#x9;&#x9;&#x9;}else {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;btnDelete.setEnabled(false);&#xa;&#x9;&#x9;&#x9;&#x9;btnModify.setEnabled(false);&#xa;}&#xa;        }&#xa;    });"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblPeople.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
           </AuxValues>
         </Component>
@@ -145,6 +148,15 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDelete">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
