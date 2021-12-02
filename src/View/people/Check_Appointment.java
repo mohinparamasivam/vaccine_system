@@ -20,6 +20,7 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -38,6 +39,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.UUID;
 import model.People;
+import model.Appointment;
 
 /**
  *
@@ -74,8 +76,6 @@ public class Check_Appointment extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,35 +168,26 @@ public class Check_Appointment extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(18, 18, 18))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                                     .addGap(19, 19, 19)))
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
-                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton5)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton1)
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,19 +202,13 @@ public class Check_Appointment extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton4)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton5)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,7 +308,6 @@ public class Check_Appointment extends javax.swing.JFrame {
             
         
         jDateChooser1.setDate(null);
-        jTextField2.setText("");
         JOptionPane.showMessageDialog(jFrame_popup, "Dose 1 Appointment Cancelled !");
         /* Add code here to cancel the appointment */
         
@@ -393,7 +377,6 @@ public class Check_Appointment extends javax.swing.JFrame {
             
         
         jDateChooser2.setDate(null);
-        jTextField3.setText("");
         JOptionPane.showMessageDialog(jFrame_popup, "Dose 2 Appointment Cancelled !");
         /* Add code here to cancel the appointment */
         
@@ -403,7 +386,87 @@ public class Check_Appointment extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
+        //get date and time from GUI
         
+        Instant dose1_date = jDateChooser1.getDate().toInstant();
+        Instant dose2_date = jDateChooser2.getDate().toInstant();
+        
+        System.out.println(dose1_date);
+        System.out.println(dose2_date);
+
+        
+        
+        //Check if Dose2 appointment date is bigger than dose1 appointment
+        
+        int value = dose2_date.compareTo(dose1_date);
+        
+        AppointmentDAO appointmentdao = FileAppointmentDAO.getInstance();
+        List<Appointment> appointment_list = appointmentdao.all();
+        List<UUID> arr_appointment_id = new ArrayList<UUID>();
+        
+        if (value > 0){
+            //Dose2 Appointment is greater
+            
+            //get appointment ids
+            for(Appointment appointment : appointment_list){
+                if(appointment.getPeople().getUsername().equals(jTextField1.getText())){
+                 arr_appointment_id.add(appointment.getAppointmentId());
+                }
+            }
+            
+          
+            UUID dose1_appointment_new = arr_appointment_id.get(0);
+            UUID dose2_appointment_new = arr_appointment_id.get(1);
+            
+            LocalDateTime ldt_dose1 = null;
+             LocalDateTime ldt_dose2 = null;
+             
+            for(Appointment appointment : appointment_list){
+                if(dose1_appointment_new.equals(appointment.getAppointmentId())){
+                    System.out.println(dose1_appointment_new);
+                     ldt_dose1 = LocalDateTime.ofInstant(dose1_date, ZoneOffset.UTC);
+                    System.out.println("LocalDateTime : " + ldt_dose1);
+                    appointment.setTime(ldt_dose1);
+                    System.out.println(appointment.getTime());
+                    
+                }
+                
+                if(dose2_appointment_new.equals(appointment.getAppointmentId())){
+                    System.out.println(dose2_appointment_new);
+                    ldt_dose2 = LocalDateTime.ofInstant(dose2_date, ZoneOffset.UTC);
+                    System.out.println("LocalDateTime : " + ldt_dose2);
+                    appointment.setTime(ldt_dose2);
+                    System.out.println(appointment.getTime());
+                }      
+            }
+            
+            JOptionPane.showMessageDialog(jFrame_popup, "Appointment Confirmed!\n\n"+
+                    "Dose 1 : "+ldt_dose1.getDayOfMonth()+"/"+ldt_dose1.getMonthValue()+"/"+ldt_dose1.getYear()+" "+ldt_dose1.getHour() + ":" + ldt_dose1.getMinute()+"\n"
+            +"Dose 2 : "+ldt_dose2.getDayOfMonth()+"/"+ldt_dose2.getMonthValue()+"/"+ldt_dose2.getYear()+" "+ldt_dose2.getHour() + ":" + ldt_dose2.getMinute()+"\n");
+            
+           
+               
+                            
+                           
+        }
+        
+        else if (value == 0){
+            
+            //Show box to enter valid date
+            JOptionPane.showMessageDialog(jFrame_popup, "Please Enter Different Dates for Dose 1 & Dose 2");
+        }
+            
+        else{
+           //Date1 is bigger than Date2
+                //Show box to enter valid date
+                JOptionPane.showMessageDialog(jFrame_popup, "Please Enter Valid Dose 1 Date");
+        }
+    
+        
+
+        
+        
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -417,8 +480,6 @@ public class Check_Appointment extends javax.swing.JFrame {
         
         jDateChooser1.setCalendar(null);
         jDateChooser2.setCalendar(null);
-        jTextField2.setText("");
-        jTextField3.setText("");
         
         //get appointment date  and insert into the panel
         
@@ -456,8 +517,7 @@ public class Check_Appointment extends javax.swing.JFrame {
               // jTextField2.setText(dose1.toString());
               // jTextField3.setText(dose2.toString());
               
-             jTextField2.setText(dose1_appointment.atZone(ZoneId.systemDefault()).toInstant().atZone(ZoneOffset.UTC).toLocalTime().toString());
-              jTextField3.setText(dose2_appointment.atZone(ZoneId.systemDefault()).toInstant().atZone(ZoneOffset.UTC).toLocalTime().toString());
+     
 
             
         }
@@ -468,7 +528,6 @@ public class Check_Appointment extends javax.swing.JFrame {
             Date dose1 = Date.from(dose1_appointment.atZone(ZoneId.systemDefault()).toInstant());
             jDateChooser1.setDate(dose1);
             //jTextField2.setText(dose1.toString());
-            jTextField2.setText((dose1_appointment.atZone(ZoneId.systemDefault()).toInstant().atZone(ZoneOffset.UTC).toLocalTime()).toString());
 
         }
         
@@ -535,7 +594,5 @@ public class Check_Appointment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
