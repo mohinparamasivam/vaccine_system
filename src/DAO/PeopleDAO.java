@@ -19,6 +19,10 @@ public interface PeopleDAO extends BaseRootDAO<People> {
 
     public List<People> getNonCitizens();
 
+    public List<People> getRegisteredPeople();
+
+    public List<People> getNotRegisteredPeople();
+
     public boolean isDuplicatedUsername(String username);
 
 }

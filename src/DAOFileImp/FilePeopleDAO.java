@@ -64,6 +64,27 @@ public class FilePeopleDAO extends FileBaseDAO<People> implements PeopleDAO {
     }
 
     @Override
+    public List<People> getRegisteredPeople() {
+        List<People> peoples = this.all();
+        List<People> ppList = new ArrayList<>();
+        peoples.stream().filter(people -> (people.getRegistrationStatus().equals(People.RegistrationStatus.REGISTERED))).forEachOrdered(people -> {
+            ppList.add(people);
+        });
+        return ppList;
+    }
+
+    @Override
+    public List<People> getNotRegisteredPeople() {
+        List<People> peoples = this.all();
+        List<People> ppList = new ArrayList<>();
+        peoples.stream().filter(people -> (people.getRegistrationStatus().equals(People.RegistrationStatus.NOT_REGISTERED))).forEachOrdered(people -> {
+            ppList.add(people);
+        });
+        return ppList;
+    }
+
+
+    @Override
     public boolean isDuplicatedUsername(String username) {
         List<People> peoples = this.all();
         for (People people : peoples) {
