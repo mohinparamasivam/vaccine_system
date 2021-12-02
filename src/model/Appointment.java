@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -96,6 +97,10 @@ public class Appointment implements Model {
     @Override
     public UUID getKey() {
         return appointmentId;
+    }
+
+    public void setTime(Instant dose1_date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
