@@ -8,6 +8,7 @@ package View.people;
 import DAOFileImp.FilePeopleDAO;
 import View.LoginPresenter;
 import View.LoginView;
+import javax.swing.JOptionPane;
 import model.People;
 
 /**
@@ -99,15 +100,11 @@ public class People_Dashboard extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 89, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -115,6 +112,10 @@ public class People_Dashboard extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,14 +140,20 @@ public class People_Dashboard extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Vaccine_Registration hframe = new Vaccine_Registration();
-        hframe.setVisible(true);
-        this.dispose();
+        if(loggedInPeople.getRegistrationStatus() == People.RegistrationStatus.REGISTERED){
+            JOptionPane.showMessageDialog(null, "You have registered to vaccination programme.");
+        }else{
+            Vaccine_Registration hframe = new Vaccine_Registration();
+            hframe.setLocationRelativeTo(this);
+            hframe.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Vaccination_Status hframe = new Vaccination_Status();
+            hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -154,6 +161,7 @@ public class People_Dashboard extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         Check_Appointment hframe = new Check_Appointment();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -167,6 +175,7 @@ public class People_Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoginView hframe = new LoginView();
         LoginPresenter loginPresenter = new LoginPresenter(hframe);
+        hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
         

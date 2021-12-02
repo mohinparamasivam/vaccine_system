@@ -282,6 +282,7 @@ public class People_Register extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         People_Records_Main hframe = new People_Records_Main();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed

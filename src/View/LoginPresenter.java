@@ -61,10 +61,12 @@ public class LoginPresenter {
                 if (isPersonnelLogin) {
 
                     Personnel_Dashboard personnel_Dashboard = new Personnel_Dashboard(userDao.getPersonnelByUsernameAndPassword(username, password));
+                    personnel_Dashboard.setLocationRelativeTo(view);
                     personnel_Dashboard.setVisible(true);
                     view.dispose();
                 } else if (isPeopleLogin) {
                     People_Dashboard people_Dashboard = new People_Dashboard(userDao.getPeopleByUsernameAndPassword(username, password));
+                    people_Dashboard.setLocationRelativeTo(view);
                     people_Dashboard.setVisible(true);
                     view.dispose();
                 }

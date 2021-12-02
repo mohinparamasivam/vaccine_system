@@ -276,6 +276,7 @@ public class VaccineSupply_Create extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         VaccineSupply_Main hframe = new VaccineSupply_Main();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
         

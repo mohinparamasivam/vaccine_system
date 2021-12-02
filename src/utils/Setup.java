@@ -10,7 +10,7 @@ package utils;
  */
 public class Setup {
     public static void main(String[] args) {
-        Settings.createDefaultSettings();
+//        Settings.createDefaultSettings();
         DataFaker.initAllData();
         DataFaker.printAllData();
 

@@ -109,6 +109,7 @@ public class People_Records_Main extends javax.swing.JFrame {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         People_Register hframe = new People_Register();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
@@ -116,6 +117,7 @@ public class People_Records_Main extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         People_Records_Search hframe = new People_Records_Search();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -123,6 +125,7 @@ public class People_Records_Main extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         Personnel_Dashboard hframe = new Personnel_Dashboard();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
         

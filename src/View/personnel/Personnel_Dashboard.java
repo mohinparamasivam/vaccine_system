@@ -18,7 +18,7 @@ import model.Personnel;
  */
 public class Personnel_Dashboard extends javax.swing.JFrame {
 
-    static Personnel personnel;
+    static Personnel loggedInPersonnel;
     final PersonnelDAO personnelDao = FilePersonnelDAO.getInstance();
 
     /**
@@ -32,8 +32,8 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
      * Creates new form Staff_Dashboard
      */
     public Personnel_Dashboard(Personnel personnel) {
-        personnel = personnel;
-        this.setTitle("Welcome! " + personnel.getName());
+        loggedInPersonnel = personnel;
+        this.setTitle("Welcome! " + loggedInPersonnel.getName());
         initComponents();
     }
 
@@ -142,6 +142,7 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         People_Records_Main hframe = new People_Records_Main();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -150,6 +151,7 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Appointments_Main hframe = new Appointments_Main();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
         
@@ -164,6 +166,7 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoginView hframe = new LoginView();
         LoginPresenter loginPresenter = new LoginPresenter(hframe);
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -171,6 +174,7 @@ public class Personnel_Dashboard extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         VaccineSupply_Main hframe = new VaccineSupply_Main();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed

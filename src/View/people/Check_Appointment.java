@@ -9,37 +9,18 @@ import DAO.AppointmentDAO;
 import DAO.PeopleDAO;
 import DAOFileImp.FileAppointmentDAO;
 import DAOFileImp.FilePeopleDAO;
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.components.DateTimePicker;
-import com.github.lgooddatepicker.components.TimePicker;
-import com.github.lgooddatepicker.components.TimePickerSettings;
-import com.github.lgooddatepicker.components.TimePickerSettings.TimeArea;
-import com.github.lgooddatepicker.zinternaltools.InternalUtilities;
-import com.toedter.calendar.JDateChooser;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.UUID;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Appointment;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.UUID;
 import model.People;
-import model.Appointment;
 
 /**
  *
@@ -230,6 +211,7 @@ public class Check_Appointment extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
          People_Dashboard hframe = new People_Dashboard();
+        hframe.setLocationRelativeTo(this);
          hframe.setVisible(true);
          this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed

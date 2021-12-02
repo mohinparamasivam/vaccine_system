@@ -181,9 +181,7 @@ public class Appointment_Modify extends javax.swing.JFrame {
            
             appDao.update(appointment.getKey(),  appointment);
             JOptionPane.showMessageDialog(null, "Updated successfully!");
-            Appointment_Records_Search aSearch = new Appointment_Records_Search();
-            aSearch.setVisible(true);
-            this.dispose();
+            btnBackActionPerformed(evt);
         } else {
             JOptionPane.showMessageDialog(null, strbError.toString(), "Invalid Input!", JOptionPane.ERROR_MESSAGE);
         }
@@ -194,6 +192,7 @@ public class Appointment_Modify extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Appointment_Records_Search hframe = new Appointment_Records_Search();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed

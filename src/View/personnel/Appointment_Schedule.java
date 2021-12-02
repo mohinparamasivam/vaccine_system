@@ -185,6 +185,7 @@ public class Appointment_Schedule extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         Appointments_Main hframe = new Appointments_Main();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed

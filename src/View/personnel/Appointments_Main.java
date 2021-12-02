@@ -109,6 +109,7 @@ public class Appointments_Main extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Appointment_Schedule hframe = new Appointment_Schedule();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -116,6 +117,7 @@ public class Appointments_Main extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Appointment_Records_Search hframe = new Appointment_Records_Search();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -123,6 +125,7 @@ public class Appointments_Main extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         Personnel_Dashboard hframe = new Personnel_Dashboard();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
         

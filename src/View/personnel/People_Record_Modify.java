@@ -334,6 +334,7 @@ public class People_Record_Modify extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
        People_Records_Search hframe = new People_Records_Search();
+        hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
@@ -403,9 +404,7 @@ public class People_Record_Modify extends javax.swing.JFrame {
 
             peopleDao.update(key, peopleTemp);
             JOptionPane.showMessageDialog(null, "Updated successfully!");
-            People_Records_Search pSearch = new People_Records_Search();
-            pSearch.setVisible(true);
-            this.dispose();
+            btnBackActionPerformed(evt);
         } else {
             JOptionPane.showMessageDialog(null, strbError.toString(), "Invalid Input!", JOptionPane.ERROR_MESSAGE);
         }

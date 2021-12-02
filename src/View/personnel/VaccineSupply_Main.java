@@ -111,6 +111,7 @@ public class VaccineSupply_Main extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          VaccineSupply_Create hframe = new VaccineSupply_Create();
+          hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
         
@@ -119,7 +120,8 @@ public class VaccineSupply_Main extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        VaccineSupply_ViewNew hframe = new VaccineSupply_ViewNew();
+        VaccineSupply_View hframe = new VaccineSupply_View();
+        hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
 //VaccineSupply_Modify hframe = new VaccineSupply_Modify();
@@ -136,6 +138,7 @@ public class VaccineSupply_Main extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         Personnel_Dashboard hframe = new Personnel_Dashboard();
+         hframe.setLocationRelativeTo(this);
         hframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
