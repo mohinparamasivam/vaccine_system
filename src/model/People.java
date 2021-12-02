@@ -27,6 +27,7 @@ public class People extends User implements Generatable {
     private String peopleId;
     private String address;
     private String country;
+    private RegistrationStatus registrationStatus;
 
     public People(PeopleType peopleType, LocalDate dob, Gender gender, String peopleId, String address, String country, String username, String name, String password, int age, String contact) {
         this(peopleType, VaccincationStatus.UNVACINNATED, new ArrayList<Vaccination>(), dob, gender, peopleId, address, country, username, name, password, age, contact);
@@ -44,6 +45,7 @@ public class People extends User implements Generatable {
         this.country = country;
         this.age = age;
         this.contact = contact;
+        this.registrationStatus = RegistrationStatus.NOT_REGISTERED;
     }
 
     @Override
@@ -132,7 +134,6 @@ public class People extends User implements Generatable {
         this.contact = contact;
     }
 
-
     @Override
     public String getGenerateTitle() {
         return "Personal Information";
@@ -168,6 +169,14 @@ public class People extends User implements Generatable {
         strb.append(this.getDob());
 
         return strb.toString();
+    }
+
+    public RegistrationStatus getRegistrationStatus() {
+        return registrationStatus;
+    }
+
+    public void setRegistrationStatus(RegistrationStatus registrationStatus) {
+        this.registrationStatus = registrationStatus;
     }
 
     public enum PeopleType {
@@ -209,4 +218,16 @@ public class People extends User implements Generatable {
         }
 
     }
+
+    public enum RegistrationStatus {
+        REGISTERED,
+        NOT_REGISTERED;
+
+        @Override
+        public String toString() {
+            return Util.capitalizeFirstLetter(this.name());
+        }
+
+    }
+
 }

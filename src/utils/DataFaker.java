@@ -94,6 +94,9 @@ public class DataFaker {
                     "people",
                     25 + i,
                     "011-111111" + ind);
+            if (i == 0) { //set the first guy to registered
+                people.setRegistrationStatus(People.RegistrationStatus.REGISTERED);
+            }
             peopleDao.create(people);
         }
         //create 2 female citizen
@@ -107,6 +110,9 @@ public class DataFaker {
                     "people",
                     30 + i,
                     "012-222222" + ind);
+            if (i == 2) { //set the first guy to registered
+                people.setRegistrationStatus(People.RegistrationStatus.REGISTERED);
+            }
             peopleDao.create(people);
         }
 
@@ -122,6 +128,9 @@ public class DataFaker {
                     "people",
                     22 + i,
                     "011-3333333" + ind);
+            if (i == 0) { //set the first guy to registered
+                people.setRegistrationStatus(People.RegistrationStatus.REGISTERED);
+            }
             peopleDao.create(people);
         }
         //create 2 female non-citizen
@@ -136,6 +145,9 @@ public class DataFaker {
                     "people",
                     40 + i,
                     "011-4444444" + ind);
+            if (i == 0) { //set the first guy to registered
+                people.setRegistrationStatus(People.RegistrationStatus.REGISTERED);
+            }
             peopleDao.create(people);
         }
     }
