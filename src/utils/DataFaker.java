@@ -30,7 +30,7 @@ import model.Centre;
 import model.Janssen;
 import model.Moderna;
 import model.People;
-import model.PeopleFactory;
+import model.factory.PeopleFactory;
 import model.Personnel;
 import model.Pfizer;
 import model.Sinovac;
