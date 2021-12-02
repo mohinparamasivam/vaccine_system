@@ -64,7 +64,7 @@ public class LoginPresenter {
                     personnel_Dashboard.setVisible(true);
                     view.dispose();
                 } else if (isPeopleLogin) {
-                    People_Dashboard people_Dashboard = new People_Dashboard();
+                    People_Dashboard people_Dashboard = new People_Dashboard(userDao.getPeopleByUsernameAndPassword(username, password));
                     people_Dashboard.setVisible(true);
                     view.dispose();
                 }

@@ -5,8 +5,10 @@
  */
 package View.people;
 
+import DAOFileImp.FilePeopleDAO;
 import View.LoginPresenter;
 import View.LoginView;
+import model.People;
 
 /**
  *
@@ -14,11 +16,26 @@ import View.LoginView;
  */
 public class People_Dashboard extends javax.swing.JFrame {
 
+    private static People loggedInPeople;
+    private People people;
     /**
      * Creates new form People_Dashboard
      */
     public People_Dashboard() {
+        loggedInPeople = FilePeopleDAO.getInstance().all().get(1);
         initComponents();
+    }
+
+    /**
+     * Creates new form People_Dashboard
+     */
+    public People_Dashboard(People people) {
+        loggedInPeople = people;
+        initComponents();
+    }
+
+    public static People getLoggedInPeople() {
+        return loggedInPeople;
     }
 
     /**

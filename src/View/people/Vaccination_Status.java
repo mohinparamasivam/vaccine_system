@@ -5,25 +5,25 @@
  */
 package View.people;
 
-import DAO.PeopleDAO;
-import DAOFileImp.FilePeopleDAO;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import javax.swing.JOptionPane;
 import model.People;
-import model.Vaccination;
+import report.FileReportGenerator;
+import report.PdfReportGenerator;
+import report.TxtReportGenerator;
 
 /**
  *
  * @author Mohin Paramasivam
  */
 public class Vaccination_Status extends javax.swing.JFrame {
-
+    People people;
     /**
      * Creates new form Vaccination_Status
      */
     public Vaccination_Status() {
+        people = People_Dashboard.getLoggedInPeople();
         initComponents();
+        initInformation();
     }
 
     /**
@@ -38,40 +38,29 @@ public class Vaccination_Status extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnGenerateTxt = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblVaccination1 = new javax.swing.JLabel();
+        lblVaccination2 = new javax.swing.JLabel();
+        lblPersonalDetails = new javax.swing.JLabel();
+        btnGeneratePdf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Vaccination Status");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel2.setText("First Dose : ");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel3.setText("Second Dose : ");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
-        jButton1.setText("Generate Certificate");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerateTxt.setText("Generate Txt");
+        btnGenerateTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Quit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGenerateTxtActionPerformed(evt);
             }
         });
 
@@ -82,15 +71,22 @@ public class Vaccination_Status extends javax.swing.JFrame {
             }
         });
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel8.setText("Personal Information:");
 
-        jLabel8.setText("Username : ");
+        lblVaccination1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblVaccination1.setText("Vaccination incomplete.");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        lblVaccination2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblVaccination2.setText("Vaccination incomplete.");
+
+        lblPersonalDetails.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblPersonalDetails.setText("jLabel4");
+
+        btnGeneratePdf.setText("Generate PDF");
+        btnGeneratePdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                btnGeneratePdfActionPerformed(evt);
             }
         });
 
@@ -101,128 +97,107 @@ public class Vaccination_Status extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel8))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblVaccination1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblVaccination2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPersonalDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(btnGenerateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnGeneratePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel1)
-                        .addContainerGap(232, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(29, 29, 29))
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3)
-                .addGap(18, 18, 18))
+                .addGap(199, 199, 199)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 43, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel2)
-                        .addGap(72, 72, 72)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(85, 85, 85)))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPersonalDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblVaccination1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblVaccination2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGenerateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGeneratePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        
-        String username_input = jTextField1.getText();
-        
-        //get the name of the user from People array based on username supplied
-
-        
-        
-        /* get vaccination report based on the username supplied by the user
-        
-        */
-        
-        PeopleDAO peopledao = FilePeopleDAO.getInstance();
-        List<People> people = peopledao.all();
-        
-        List<Vaccination> vaccination_data = null;
-        
-        String vaccine_id = null;
-        
-        List<String> arr_vaccine_report = new ArrayList<String>();
-        
-        for (People people_data : people ){
-            if(people_data.getUsername().equals(username_input)){
-                vaccination_data = people_data.getVaccinations();  
-        }
-        }
-        
-        for(Vaccination vaccination : vaccination_data ){
-            arr_vaccine_report.add(vaccination.getGenerateContent());
-
-        }
-        
-        String report_dose1 = arr_vaccine_report.get(0);
-        String report_dose2 = arr_vaccine_report.get(1);
-        
-        
-        jTextArea2.setText(report_dose1);
-        jTextArea3.setText(report_dose2);
-        
-        
-        
-        
-        
+    private void btnGenerateTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateTxtActionPerformed
+//        // TODO add your handling code here:
+        FileReportGenerator reportGenerator = new TxtReportGenerator(people.getName() + "'s Vaccination Status", people.getVaccinationReportGeneratables());
+        reportGenerator.saveReport();
+        JOptionPane.showMessageDialog(null, "Saved txt report to \"" + reportGenerator.getFilePath() + "\"!");
+//        String username_input = jTextField1.getText();
+//
+//        //get the name of the user from People array based on username supplied
+//
+//
+//
+//        /* get vaccination report based on the username supplied by the user
+//
+//        */
+//
+//        PeopleDAO peopledao = FilePeopleDAO.getInstance();
+//        List<People> people = peopledao.all();
+//
+//        List<Vaccination> vaccination_data = null;
+//
+//        String vaccine_id = null;
+//
+//        List<String> arr_vaccine_report = new ArrayList<String>();
+//
+//        for (People people_data : people ){
+//            if(people_data.getUsername().equals(username_input)){
+//                vaccination_data = people_data.getVaccinations();
+//        }
+//        }
+//
+//        for(Vaccination vaccination : vaccination_data ){
+//            arr_vaccine_report.add(vaccination.getGenerateContent());
+//
+//        }
+//
+//        String report_dose1 = arr_vaccine_report.get(0);
+//        String report_dose2 = arr_vaccine_report.get(1);
+//
+//
+//        jTextArea2.setText(report_dose1);
+//        jTextArea3.setText(report_dose2);
+//
+//
         
         
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btnGenerateTxtActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -232,9 +207,11 @@ public class Vaccination_Status extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void btnGeneratePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneratePdfActionPerformed
+       FileReportGenerator reportGenerator = new PdfReportGenerator(people.getName() + "'s Vaccination Status", people.getVaccinationReportGeneratables());
+        reportGenerator.saveReport();
+        JOptionPane.showMessageDialog(null, "Saved pdf report to \"" + reportGenerator.getFilePath() + "\"!");
+    }//GEN-LAST:event_btnGeneratePdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,17 +249,31 @@ public class Vaccination_Status extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnGeneratePdf;
+    private javax.swing.JButton btnGenerateTxt;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblPersonalDetails;
+    private javax.swing.JLabel lblVaccination1;
+    private javax.swing.JLabel lblVaccination2;
     // End of variables declaration//GEN-END:variables
+
+    private void initInformation() {
+        lblPersonalDetails.setText(utils.Util.convertStringToHtmlString(people.getGenerateContent()));
+        for (int i = 0; i < people.getVaccinations().size(); i++) {
+            javax.swing.JLabel lbl = null;
+            if (i == 0) {
+                lbl = lblVaccination1;
+            } else {
+                lbl = lblVaccination2;
+            }
+            String vaccinationDetails = people.getVaccinations().get(i).getGenerateContent();
+            lbl.setText(utils.Util.convertStringToHtmlString(vaccinationDetails));
+        }
+
+
+    }
 }

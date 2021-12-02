@@ -28,4 +28,11 @@ public class Util {
             directory.mkdir();
         }
     }
+
+    public static String convertStringToHtmlString(String content) {
+        StringBuilder c = new StringBuilder("<html>\r\n");
+        c.append(content.replaceAll("\n", "<br>\r\n"));
+        c.append("</html>");
+        return c.toString();
+    }
 }
