@@ -4,6 +4,7 @@
  */
 package utils;
 
+import java.io.File;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,5 +20,19 @@ public class Util {
 
     public static void emptyTableModel(DefaultTableModel model) {
         model.setRowCount(0);
+    }
+
+    public static void createFolderIfNotExist(String folderPath) {
+        File directory = new File(folderPath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+    }
+
+    public static String convertStringToHtmlString(String content) {
+        StringBuilder c = new StringBuilder("<html>\r\n");
+        c.append(content.replaceAll("\n", "<br>\r\n"));
+        c.append("</html>");
+        return c.toString();
     }
 }

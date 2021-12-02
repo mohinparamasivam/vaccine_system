@@ -16,7 +16,7 @@ import java.util.List;
 public class TxtReportGenerator extends FileReportGenerator {
 
     public TxtReportGenerator(String fileName, List<? extends Generatable> subjects) {
-        super(fileName, subjects);
+        super(fileName + ".txt", subjects);
     }
 
 

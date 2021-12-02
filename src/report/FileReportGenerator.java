@@ -11,7 +11,7 @@ import utils.Settings;
  *
  * @author howar
  */
-abstract class FileReportGenerator extends ReportGenerator {
+public abstract class FileReportGenerator extends ReportGenerator {
 
     private String fileFolder = Settings.getProperty("report.folder", "report/");
     private String fileName;
@@ -21,7 +21,9 @@ abstract class FileReportGenerator extends ReportGenerator {
         super(subjects);
         this.fileName = fileName;
         this.filePath = fileFolder + fileName;
+        utils.Util.createFolderIfNotExist(fileFolder);
     }
+
 
     public String getFilePath() {
         return filePath;

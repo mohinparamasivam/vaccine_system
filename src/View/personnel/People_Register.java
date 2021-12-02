@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import model.People;
-import model.PeopleFactory;
+import model.factory.PeopleFactory;
 import utils.Validator;
 
 /**

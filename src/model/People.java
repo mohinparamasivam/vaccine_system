@@ -7,6 +7,7 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import report.EmptyVaccination;
 import report.Generatable;
 import report.ReportGenerator;
 import utils.Util;
@@ -169,6 +170,20 @@ public class People extends User implements Generatable {
         strb.append(this.getDob());
 
         return strb.toString();
+    }
+
+    public List<? extends Generatable> getVaccinationReportGeneratables() {
+        List<Vaccination> vcns = this.getVaccinations();
+        List<Generatable> generatables = new ArrayList<>();
+        generatables.add(this);
+        for (int i = 0; i < 2; i++) {
+            if (i < vcns.size()) {
+                generatables.add((Generatable) vcns.get(i));
+            } else {
+                generatables.add(new EmptyVaccination());
+            }
+        }
+        return generatables;
     }
 
     public RegistrationStatus getRegistrationStatus() {
