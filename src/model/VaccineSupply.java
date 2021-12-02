@@ -7,6 +7,7 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -122,6 +123,30 @@ public class VaccineSupply implements Model {
 
     public void setAccesiblePeopleTypes(List<People.PeopleType> accesiblePeopleTypes) {
         this.accesiblePeopleTypes = accesiblePeopleTypes;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final VaccineSupply other = (VaccineSupply) obj;
+        if (!Objects.equals(this.supplyId, other.supplyId)) {
+            return false;
+        }
+        return true;
     }
 
 

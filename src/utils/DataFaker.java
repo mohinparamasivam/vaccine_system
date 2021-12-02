@@ -94,9 +94,8 @@ public class DataFaker {
                     "people",
                     25 + i,
                     "011-111111" + ind);
-            if (i == 0) { //set the first guy to registered
-                people.setRegistrationStatus(People.RegistrationStatus.REGISTERED);
-            }
+            people.setRegistrationStatus(People.RegistrationStatus.REGISTERED);
+
             peopleDao.create(people);
         }
         //create 2 female citizen

@@ -4,6 +4,9 @@
  */
 package DAO;
 
+import java.util.List;
+import java.util.UUID;
+import model.Centre;
 import model.VaccineSupply;
 
 /**
@@ -13,4 +16,12 @@ import model.VaccineSupply;
 public interface VaccineSupplyDAO extends BaseRootDAO<VaccineSupply> {
 
     public VaccineSupply findVaccineSupplyByBatchNo(String batchNo);
+
+    public List<VaccineSupply> findVaccineSupplyByCentre(UUID centreId);
+
+    public boolean isDuplicatedBatchNo(String batchNo);
+
+    public boolean canDeleteVaccineSupply(UUID vaccineId);
+
+    public void create(VaccineSupply t, Centre centre);
 }

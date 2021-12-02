@@ -8,6 +8,7 @@ import DAO.CentreDAO;
 import java.util.ArrayList;
 import java.util.List;
 import model.Centre;
+import model.VaccineSupply;
 
 /**
  *
@@ -41,6 +42,18 @@ public class FileCentreDAO extends FileBaseDAO<Centre> implements CentreDAO {
         });
         return ctList;
     }
+
+    @Override
+    public Centre findCentreByVaccineSupply(VaccineSupply vs) {
+        List<Centre> centres = this.all();
+        for (Centre centre : centres) {
+            if (centre.getVaccineSupplies().contains(vs)) {
+                return centre;
+            }
+        }
+        return null;
+    }
+
 
 
 }

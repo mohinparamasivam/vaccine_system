@@ -6,6 +6,7 @@ package DAO;
 
 import java.util.List;
 import model.Centre;
+import model.VaccineSupply;
 
 /**
  *
@@ -14,5 +15,7 @@ import model.Centre;
 public interface CentreDAO extends BaseRootDAO<Centre> {
 
     public List<Centre> findCentreByName(String searchKey);
+
+    public Centre findCentreByVaccineSupply(VaccineSupply vs);
 
 }

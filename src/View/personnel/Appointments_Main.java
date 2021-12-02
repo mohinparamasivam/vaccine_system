@@ -43,7 +43,7 @@ public class Appointments_Main extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Search");
+        jButton2.setText("View");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

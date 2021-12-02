@@ -47,7 +47,7 @@ public class FileVaccinationDAO extends FileBaseDAO<Vaccination> implements Vacc
         Vaccination vcn = new Vaccination(appointment.getTime(),
                 appointment.getCentre(),
                 vcSupply);
-        this.create(vcn);
+        super.create(vcn);
         logger.info("Created vaccination at {}: {}, ", vcn.getCentre().getName(), vcn.getKey());
 
         //then update the people vaccinations and vaccination status

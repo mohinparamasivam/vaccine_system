@@ -5,7 +5,11 @@
 package DAOFileImp;
 
 import DAO.VaccineSupplyDAO;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import model.Centre;
+import model.Vaccination;
 import model.VaccineSupply;
 
 /**
@@ -31,17 +35,17 @@ public class FileVaccineSupplyDAO extends FileBaseDAO<VaccineSupply> implements 
         return instance;
     }
 
+    @Override
+    public List<VaccineSupply> findVaccineSupplyByCentre(UUID centreId) {
+        List<VaccineSupply> vaccineSupplies = this.all();
+        Centre centre = FileCentreDAO.getInstance().get(centreId);
+        List<VaccineSupply> vsList = new ArrayList<>();
+        vaccineSupplies.stream().filter(vs -> centre.getVaccineSupplies().contains(vs)).forEachOrdered(vs -> {
+            vsList.add(vs);
+        });
+        return vsList;
+    }
 
-//    @Override
-//    public List<VaccineSupply> findVaccineSupplyByCentre(UUID centreId) {
-//        List<VaccineSupply> vaccineSupplies = this.all();
-//         List<VaccineSupply> vsList = new ArrayList<>();
-//        peoples.stream().filter(people -> (people.getName().toLowerCase().contains(searchKey.toLowerCase()))).forEachOrdered(people -> {
-//            vsList.add(people);
-//        });
-//        return vsList;
-//
-//    }
     @Override
     public VaccineSupply findVaccineSupplyByBatchNo(String batchNo) {
         List<VaccineSupply> vaccineSupplies = this.all();
@@ -51,6 +55,53 @@ public class FileVaccineSupplyDAO extends FileBaseDAO<VaccineSupply> implements 
             }
         }
         return null;
+    }
+
+    @Override
+    public void create(VaccineSupply t) {
+        throw new UnsupportedOperationException("Should not use this create method for vaccine supply, use create(VaccineSupply t, Centre centre) instead");
+    }
+
+    @Override
+    public void create(VaccineSupply t, Centre centre) {
+        super.create(t);
+        List<VaccineSupply> vss = centre.getVaccineSupplies();
+        vss.add(t);
+        centre.setVaccineSupplies(vss);
+        FileCentreDAO.getInstance().update(centre.getKey(), centre);
+    }
+
+    @Override
+    public void update(UUID id, VaccineSupply t) {
+        super.update(id, t);
+        Centre centre = FileCentreDAO.getInstance().findCentreByVaccineSupply(t);
+        List<VaccineSupply> vss = centre.getVaccineSupplies();
+        vss.add(t);
+        centre.setVaccineSupplies(vss);
+        FileCentreDAO.getInstance().update(centre.getKey(), centre);
+    }
+
+    @Override
+    public boolean isDuplicatedBatchNo(String batchNo) {
+        List<VaccineSupply> vaccineSupplies = this.all();
+        for (VaccineSupply vaccineSupply : vaccineSupplies) {
+            if (vaccineSupply.getBatchNo().equalsIgnoreCase(batchNo)) {
+                logger.debug(batchNo + " vs " + vaccineSupply.getBatchNo() + " is duplicated.");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canDeleteVaccineSupply(UUID vaccineId) {
+        List<Vaccination> vcns = FileVaccinationDAO.getInstance().all();
+        for (Vaccination vcn : vcns) {
+            if (vcn.getSupply().getKey().equals(vaccineId)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

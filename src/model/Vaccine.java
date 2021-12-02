@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -62,5 +63,30 @@ public abstract class Vaccine implements Model {
     public void setDaysNeeded(int daysNeeded) {
         this.daysNeeded = daysNeeded;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vaccine other = (Vaccine) obj;
+        if (!Objects.equals(this.vaccineId, other.vaccineId)) {
+            return false;
+        }
+        return true;
+    }
+
 
 }

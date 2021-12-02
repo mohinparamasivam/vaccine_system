@@ -363,15 +363,15 @@ public class People_Record_Modify extends javax.swing.JFrame {
 
         StringBuilder strbError = new StringBuilder();
 
-        if (!Validator.isValidName(name)) {
+          if (name.isEmpty() || !Validator.isValidName(name)) {
             strbError.append("Invalid name. \n");
         }
 
-        if (peopleDao.isDuplicatedUsername(username)) {
+        if (username.isEmpty() || peopleDao.isDuplicatedUsername(username)) {
             strbError.append("Duplicated username. \n");
         }
 
-        if (isCitizen && !Validator.isValidNRIC(peopleId)) {
+        if (peopleId.isEmpty() || isCitizen && !Validator.isValidNRIC(peopleId)) {
             strbError.append("Invalid NRIC number. (Format: yymmddXXXXXX)\n");
         }
 
@@ -383,7 +383,7 @@ public class People_Record_Modify extends javax.swing.JFrame {
             strbError.append("Invalid age. \n");
         }
 
-        if (!Validator.isWords(country)) {
+        if (country.isEmpty() || !Validator.isWords(country)) {
             strbError.append("Invalid country. \n");
         }
 
