@@ -87,7 +87,7 @@ public class DataFaker {
         for (int i = 0; i < 2; i++) {
             String ind = Integer.toString(i);
             People people = PeopleFactory.createMaleCitizen(LocalDate.of(1990 + i, 1 + i, 8 + i),
-                    "1111-11-111" + ind,
+                    "11111111111" + ind,
                     "Lot 123, Jalan Test Male " + ind,
                     "people_M" + ind,
                     mNames[i],
@@ -102,7 +102,7 @@ public class DataFaker {
         for (int i = 2; i < 4; i++) {
             String ind = Integer.toString(i);
             People people = PeopleFactory.createFemaleCitizen(LocalDate.of(1980 + i, 1 + i, 8 + i),
-                    "1111-11-112" + ind,
+                    "11111211112" + ind,
                     "Lot 456, Jalan Test Female " + ind,
                     "people_F" + ind,
                     mNames[i],
