@@ -31,7 +31,7 @@ public abstract class FileBaseDAO<T extends Model> implements BaseRootDAO<T> {
     protected final String DATA_FOLDER = Settings.getProperty("db.folder", "data/");
     protected final String DATA_FILE;
 
-    FileBaseDAO(Class<T> clazz) {
+    protected FileBaseDAO(Class<T> clazz) {
         this.DATA_FILE = DATA_FOLDER + clazz.getSimpleName() + ".txt";
     }
 
