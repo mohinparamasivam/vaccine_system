@@ -32,7 +32,7 @@ public abstract class FileBaseDAO<T extends Model> implements BaseRootDAO<T> {
     protected final String DATA_FILE;
 
     FileBaseDAO(Class<T> clazz) {
-        this.DATA_FILE = DATA_FOLDER + clazz.getSimpleName();
+        this.DATA_FILE = DATA_FOLDER + clazz.getSimpleName() + ".txt";
     }
 
     public List<Object> readFileAsObjects(String filename) { //using list instead of array list to make sure the it can be maintained easily, later on i can change to other list type
