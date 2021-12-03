@@ -5,6 +5,8 @@
  */
 package View.people;
 
+import DAO.PeopleDAO;
+import DAOFileImp.FilePeopleDAO;
 import javax.swing.JOptionPane;
 import model.People;
 import report.FileReportGenerator;
@@ -17,6 +19,7 @@ import report.TxtReportGenerator;
  */
 public class Vaccination_Status extends javax.swing.JFrame {
     People people;
+    PeopleDAO peopleDao = FilePeopleDAO.getInstance();
     /**
      * Creates new form Vaccination_Status
      */
@@ -265,14 +268,16 @@ public class Vaccination_Status extends javax.swing.JFrame {
 
     private void initInformation() {
         lblPersonalDetails.setText(utils.Util.convertStringToHtmlString(people.getGenerateContent()));
-        for (int i = 0; i < people.getVaccinations().size(); i++) {
+        People p = peopleDao.get(people.getKey()); // getting data from data file instead of static runtime
+        System.out.println(p.getVaccinations().size());
+        for (int i = 0; i < p.getVaccinations().size(); i++) {
             javax.swing.JLabel lbl = null;
             if (i == 0) {
                 lbl = lblVaccination1;
             } else {
                 lbl = lblVaccination2;
             }
-            String vaccinationDetails = people.getVaccinations().get(i).getGenerateContent();
+            String vaccinationDetails = p.getVaccinations().get(i).getGenerateContent();
             lbl.setText(utils.Util.convertStringToHtmlString(vaccinationDetails));
         }
 

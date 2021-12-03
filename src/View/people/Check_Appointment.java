@@ -8,12 +8,10 @@ package View.people;
 import DAO.AppointmentDAO;
 import DAO.PeopleDAO;
 import DAO.VaccinationDAO;
-import DAO.VaccineDAO;
 import DAO.VaccineSupplyDAO;
 import DAOFileImp.FileAppointmentDAO;
 import DAOFileImp.FilePeopleDAO;
 import DAOFileImp.FileVaccinationDAO;
-import DAOFileImp.FileVaccineDAO;
 import DAOFileImp.FileVaccineSupplyDAO;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -27,7 +25,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Appointment;
 import model.People;
-import model.Vaccination;
 
 /**
  *
@@ -362,6 +359,15 @@ public class Check_Appointment extends javax.swing.JFrame {
         
         System.out.println(jDateChooser2.getDate());
         if (jDateChooser2.getDate()!=null){
+
+            String batch_number = JOptionPane.showInputDialog(jFrame_popup,
+                        "Enter Batch Number (Example : VSxxx)", null);
+                System.out.println(batch_number);
+
+            if (!vaccinesupplydao.isDuplicatedBatchNo(batch_number)) {
+                JOptionPane.showMessageDialog(null, "Invalid Batch No!");
+                return;
+            }
             
         
             
@@ -400,7 +406,6 @@ public class Check_Appointment extends javax.swing.JFrame {
             System.out.println(dose2_date);
 
 
-
             //Check if Dose2 appointment date is bigger than dose1 appointment
 
             LocalDateTime ldt_dose1 = null;
@@ -418,17 +423,13 @@ public class Check_Appointment extends javax.swing.JFrame {
                 for (Appointment appointments : appointment_list){
                     if((appointments.getKey().equals(dose1_appointment_id))){
                         appointments.setAppointmentStatus(Appointment.AppointmentStatus.COMPLETED);
-                        people.setVaccinationStatus(People.VaccincationStatus.PARTIALLY_VACCINATED);
                         appointmentdao.update(appointments.getKey(), appointments);
-                        peopledao.update(people.getUserId(), people);
                         ldt_dose1 = LocalDateTime.ofInstant(dose1_date, ZoneOffset.UTC);
                     }
                     
                     if((appointments.getKey().equals(dose2_appointment_id))){
                         appointments.setAppointmentStatus(Appointment.AppointmentStatus.COMPLETED);
-                        people.setVaccinationStatus(People.VaccincationStatus.FULLY_VACCINATED);
                         appointmentdao.update(appointments.getKey(), appointments);
-                        peopledao.update(people.getUserId(), people);
                         ldt_dose2 = LocalDateTime.ofInstant(dose2_date, ZoneOffset.UTC);
                     }
      
@@ -437,9 +438,6 @@ public class Check_Appointment extends javax.swing.JFrame {
                         "Dose 1 : "+ldt_dose1.getDayOfMonth()+"/"+ldt_dose1.getMonthValue()+"/"+ldt_dose1.getYear()+"\n"
                 +"Dose 2 : "+ldt_dose2.getDayOfMonth()+"/"+ldt_dose2.getMonthValue()+"/"+ldt_dose2.getYear()+"\n");
                
-                String batch_number = JOptionPane.showInputDialog(jFrame_popup,
-                        "Enter Batch Number (Example : VSxxx)", null);
-                System.out.println(batch_number);
 
                 
                 //add in batch number for vaccination
@@ -467,6 +465,14 @@ public class Check_Appointment extends javax.swing.JFrame {
         if (jDateChooser2.getDate()==null){
             
             System.out.println("hello world2");
+            String batch_number = JOptionPane.showInputDialog(jFrame_popup,
+                    "Enter Batch Number (Example : VSxxx)", null);
+            System.out.println(batch_number);
+
+            if (!vaccinesupplydao.isDuplicatedBatchNo(batch_number)) {
+                JOptionPane.showMessageDialog(null, "Invalid Batch No!");
+                return;
+            }
             
               
             List<People> people_list = peopledao.all();
@@ -516,9 +522,7 @@ public class Check_Appointment extends javax.swing.JFrame {
             for (Appointment appointments : appointment_list){
                 if((appointments.getKey().equals(dose1_appointment_id))){
                     appointments.setAppointmentStatus(Appointment.AppointmentStatus.COMPLETED);
-                    people.setVaccinationStatus(People.VaccincationStatus.PARTIALLY_VACCINATED);
                     appointmentdao.update(appointments.getKey(), appointments);
-                    peopledao.update(people.getUserId(), people);
                     ldt_dose1 = LocalDateTime.ofInstant(dose1_date, ZoneOffset.UTC);
                 }
               
@@ -526,11 +530,7 @@ public class Check_Appointment extends javax.swing.JFrame {
                 
             JOptionPane.showMessageDialog(jFrame_popup, "First Dose Complete!\n\n"+
                     "Dose 1 : "+ldt_dose1.getDayOfMonth()+"/"+ldt_dose1.getMonthValue()+"/"+ldt_dose1.getYear()+"\n");
-                
-            String batch_number = JOptionPane.showInputDialog(jFrame_popup,
-                    "Enter Batch Number (Example : VSxxx)", null);
-            System.out.println(batch_number);
-                
+           
             
             //add in batch number for vaccination
             
@@ -546,7 +546,7 @@ public class Check_Appointment extends javax.swing.JFrame {
             
         }
             
-        
+        people = peopledao.get(people.getKey());
                     
                  
         
