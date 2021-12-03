@@ -7,6 +7,7 @@ package DAOFileImp;
 import DAO.AppointmentDAO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import model.Appointment;
 
 /**
@@ -52,4 +53,18 @@ public class FileAppointmentDAO extends FileBaseDAO<Appointment> implements Appo
         });
         return apList;
     }
+
+    @Override
+    public List<Appointment> getNotCancelledAppointmentOfUser(UUID peopleKey) {
+        List<Appointment> appointments = this.all();
+        List<Appointment> apList = new ArrayList<>();
+        appointments.stream().filter(appointment
+                -> (appointment.getPeople().getKey().equals(peopleKey)
+                && !appointment.getAppointmentStatus().equals(Appointment.AppointmentStatus.CANCELED))
+        ).forEachOrdered(appointment -> {
+            apList.add(appointment);
+        });
+        return apList;
+    }
+
 }

@@ -5,6 +5,7 @@
 package DAO;
 
 import java.util.List;
+import java.util.UUID;
 import model.Appointment;
 
 /**
@@ -16,5 +17,7 @@ public interface AppointmentDAO extends BaseRootDAO<Appointment> {
     public List<Appointment> findAppointmentByPeopleNameOrCentreName(String searchKey);
 
     public List<Appointment> findAppointmentByPeopleName(String searchKey);
+
+    public List<Appointment> getNotCancelledAppointmentOfUser(UUID peopleKey);
 
 }

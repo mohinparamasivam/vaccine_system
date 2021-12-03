@@ -9,7 +9,6 @@ import DAO.AppointmentDAO;
 import DAO.PeopleDAO;
 import DAOFileImp.FileAppointmentDAO;
 import DAOFileImp.FilePeopleDAO;
-import com.toedter.calendar.JTextFieldDateEditor;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -59,8 +58,8 @@ public class Check_Appointment extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCancel1 = new javax.swing.JButton();
+        btnCancel2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
@@ -107,24 +106,24 @@ public class Check_Appointment extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 0, 0));
-        jButton4.setText("Cancel Appointment");
-        jButton4.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCancel1.setForeground(new java.awt.Color(255, 0, 0));
+        btnCancel1.setText("Cancel Appointment");
+        btnCancel1.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        btnCancel1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCancel1ActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 0, 0));
-        jButton5.setText("Cancel Appointment");
-        jButton5.setActionCommand("X2");
-        jButton5.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCancel2.setForeground(new java.awt.Color(255, 0, 0));
+        btnCancel2.setText("Cancel Appointment");
+        btnCancel2.setActionCommand("X2");
+        btnCancel2.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        btnCancel2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnCancel2ActionPerformed(evt);
             }
         });
 
@@ -169,8 +168,8 @@ public class Check_Appointment extends javax.swing.JFrame {
                                 .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)))
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5)))
+                            .addComponent(btnCancel1)
+                            .addComponent(btnCancel2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jButton1)
@@ -192,11 +191,11 @@ public class Check_Appointment extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4))
+                            .addComponent(btnCancel1))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5)))
+                            .addComponent(btnCancel2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +209,7 @@ public class Check_Appointment extends javax.swing.JFrame {
                 .addGap(45, 45, 45))
         );
 
-        jButton5.getAccessibleContext().setAccessibleName("X2");
+        btnCancel2.getAccessibleContext().setAccessibleName("X2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -228,25 +227,17 @@ public class Check_Appointment extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnCancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancel1ActionPerformed
         // TODO add your handling code here:
         
-        String username_input = people.getUsername();
         List<People> people_list = peopledao.all();
-        UUID people_key = null;
-        for (People people_list_loop : people_list ){
-            if(people_list_loop.getUsername().equals(username_input)){
-                people_key = people_list_loop.getKey();
-               
-            }
-        }
-        
-            
+        UUID people_key = people.getKey();
+
        // Search appointment for the specific userid
        
        List<UUID> arr_appointment_id = new ArrayList<UUID>();
        
-        List<Appointment> appointment_list = appointmentdao.all();
+        List<Appointment> appointment_list = appointmentdao.getNotCancelledAppointmentOfUser(people_key);
         
         for (Appointment appointments : appointment_list){
             if((appointments.getPeople().getKey().equals(people_key))){
@@ -267,7 +258,7 @@ public class Check_Appointment extends javax.swing.JFrame {
         for (Appointment appointments : appointment_list){
             if((appointments.getKey().equals(dose1_appointment_id))){
                 appointments.setAppointmentStatus(Appointment.AppointmentStatus.CANCELED);
-                appointmentdao.update(people_key, appointments);
+                appointmentdao.update(appointments.getKey(), appointments);
                 System.out.println("Dose1 ID : "+dose1_appointment_id);
                 System.out.println("Name : " + appointments.getPeople().getName());
                 System.out.println("Appointment key : "+appointments.getKey());
@@ -295,9 +286,9 @@ public class Check_Appointment extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(jFrame_popup, "Dose 1 Appointment Cancelled !");
         /* Add code here to cancel the appointment */
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnCancel1ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnCancel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancel2ActionPerformed
         // TODO add your handling code here:
         
         String username_input = jTextField1.getText();
@@ -362,7 +353,7 @@ public class Check_Appointment extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(jFrame_popup, "Dose 2 Appointment Cancelled !");
         /* Add code here to cancel the appointment */
         
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnCancel2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -543,19 +534,12 @@ public class Check_Appointment extends javax.swing.JFrame {
          List<LocalDateTime> arr_appointment_date = new ArrayList<LocalDateTime>();
         
         
-        List<Appointment> appointment_list = appointmentdao.all();
+        List<Appointment> appointment_list = appointmentdao.getNotCancelledAppointmentOfUser(people.getKey());
         
-        String username_input = people.getUsername();
-        for(Appointment appointment : appointment_list){
-            if(appointment.getPeople().getUsername().equals(username_input)){
-                 arr_appointment_date.add(appointment.getTime());
-                 
-                 
-            }
+        for (Appointment appointment : appointment_list) {
+            arr_appointment_date.add(appointment.getTime());
         }
-        
-        
-        
+
         if (arr_appointment_date.size() ==2){
              LocalDateTime dose1_appointment = arr_appointment_date.get(0);
              LocalDateTime dose2_appointment = arr_appointment_date.get(1);
@@ -568,6 +552,13 @@ public class Check_Appointment extends javax.swing.JFrame {
                Date dose2 = Date.from(dose2_appointment.atZone(ZoneId.systemDefault()).toInstant());
                jDateChooser1.setDate(dose1);
                jDateChooser2.setDate(dose2);
+
+               if(appointment_list.get(0).getAppointmentStatus().equals(Appointment.AppointmentStatus.COMPLETED)){
+                btnCancel1.setEnabled(false);
+            }
+            if (appointment_list.get(1).getAppointmentStatus().equals(Appointment.AppointmentStatus.COMPLETED)) {
+                btnCancel2.setEnabled(false);
+            }
                
               // jTextField2.setText(dose1.toString());
               // jTextField3.setText(dose2.toString());
@@ -583,6 +574,9 @@ public class Check_Appointment extends javax.swing.JFrame {
             Date dose1 = Date.from(dose1_appointment.atZone(ZoneId.systemDefault()).toInstant());
             jDateChooser1.setDate(dose1);
             //jTextField2.setText(dose1.toString());
+            if (appointment_list.get(0).getAppointmentStatus().equals(Appointment.AppointmentStatus.COMPLETED)) {
+                btnCancel1.setEnabled(false);
+            }
 
         }
         
@@ -638,11 +632,11 @@ public class Check_Appointment extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel1;
+    private javax.swing.JButton btnCancel2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
