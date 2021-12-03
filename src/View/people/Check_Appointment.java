@@ -444,10 +444,14 @@ public class Check_Appointment extends javax.swing.JFrame {
                 
                 //add in batch number for vaccination
                if(vaccinesupplydao.isDuplicatedBatchNo(batch_number)){
+                   System.out.println(dose2_appointment_id);
                   VaccinationDAO vaccinationdao = FileVaccinationDAO.getInstance();
                   for (Appointment appointments : appointment_list){
                       if((appointments.getKey().equals(dose2_appointment_id))){
+                          System.out.println(dose2_appointment_id);
                           vaccinationdao.createVaccination(appointments,batch_number);
+                          
+                          
                           
                       }
                   }
@@ -529,7 +533,7 @@ public class Check_Appointment extends javax.swing.JFrame {
                 
             
             //add in batch number for vaccination
-            /*
+            
            if(vaccinesupplydao.isDuplicatedBatchNo(batch_number)){
                VaccinationDAO vaccinationdao = FileVaccinationDAO.getInstance();
                for (Appointment appointments : appointment_list){
@@ -538,7 +542,7 @@ public class Check_Appointment extends javax.swing.JFrame {
                   }
                }
            }
-           */
+           
             
         }
             

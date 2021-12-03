@@ -57,11 +57,11 @@ public class FileVaccinationDAO extends FileBaseDAO<Vaccination> implements Vacc
         people.setVaccinations(vcns);
         logger.info("Added vaccination for {}: {}", people.getName(), vcn.getKey());
 
-        People.VaccincationStatus vcnStatus = people.getVaccinationStatus();
+        /*People.VaccincationStatus vcnStatus = people.getVaccinationStatus();
         if (!vcnStatus.equals(People.VaccincationStatus.FULLY_VACCINATED)) {
             people.setVaccinationStatus(vcnStatus.next());
             logger.info("Changed {}'s vaccination status to {}", people.getName(), people.getVaccinationStatus());
-        }
+        }*/
 
         FilePeopleDAO.getInstance().update(people.getKey(), people);
 
