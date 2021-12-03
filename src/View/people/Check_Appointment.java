@@ -365,84 +365,146 @@ public class Check_Appointment extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        
-        //get date and time from GUI
-        
-        Instant dose1_date = jDateChooser1.getDate().toInstant();
-        Instant dose2_date = jDateChooser2.getDate().toInstant();
-        
-        System.out.println(dose1_date);
-        System.out.println(dose2_date);
+        if (jDateChooser2.getDate()!=null){
+            
+       
 
-        
-        
-        //Check if Dose2 appointment date is bigger than dose1 appointment
-        
-        int value = dose2_date.compareTo(dose1_date);
-        
-        List<Appointment> appointment_list = appointmentdao.all();
-        List<UUID> arr_appointment_id = new ArrayList<UUID>();
-        
-        if (value > 0){
-            //Dose2 Appointment is greater
-            
-            //get appointment ids
-            for(Appointment appointment : appointment_list){
-                if(appointment.getPeople().getUsername().equals(jTextField1.getText())){
-                 arr_appointment_id.add(appointment.getAppointmentId());
+            //get date and time from GUI
+
+            Instant dose1_date = jDateChooser1.getDate().toInstant();
+            Instant dose2_date = jDateChooser2.getDate().toInstant();
+
+            System.out.println(dose1_date);
+            System.out.println(dose2_date);
+
+
+
+            //Check if Dose2 appointment date is bigger than dose1 appointment
+
+            int value = dose2_date.compareTo(dose1_date);
+
+            List<Appointment> appointment_list = appointmentdao.all();
+            List<UUID> arr_appointment_id = new ArrayList<UUID>();
+
+            if (value > 0){
+                //Dose2 Appointment is greater
+
+                //get appointment ids
+                for(Appointment appointment : appointment_list){
+                    if(appointment.getPeople().getUsername().equals(jTextField1.getText())){
+                     arr_appointment_id.add(appointment.getAppointmentId());
+                    }
                 }
-            }
-            
-          
-            UUID dose1_appointment_new = arr_appointment_id.get(0);
-            UUID dose2_appointment_new = arr_appointment_id.get(1);
-            
-            LocalDateTime ldt_dose1 = null;
-             LocalDateTime ldt_dose2 = null;
-             
-            for(Appointment appointment : appointment_list){
-                if(dose1_appointment_new.equals(appointment.getAppointmentId())){
-                    System.out.println(dose1_appointment_new);
-                     ldt_dose1 = LocalDateTime.ofInstant(dose1_date, ZoneOffset.UTC);
-                    System.out.println("LocalDateTime : " + ldt_dose1);
-                    appointment.setTime(ldt_dose1);
-                    System.out.println(appointment.getTime());
-                    
+
+
+                UUID dose1_appointment_new = arr_appointment_id.get(0);
+                UUID dose2_appointment_new = arr_appointment_id.get(1);
+
+                LocalDateTime ldt_dose1 = null;
+                 LocalDateTime ldt_dose2 = null;
+
+                for(Appointment appointment : appointment_list){
+                    if(dose1_appointment_new.equals(appointment.getAppointmentId())){
+                        System.out.println(dose1_appointment_new);
+                         ldt_dose1 = LocalDateTime.ofInstant(dose1_date, ZoneOffset.UTC);
+                        System.out.println("LocalDateTime : " + ldt_dose1);
+                        appointment.setTime(ldt_dose1);
+                        System.out.println(appointment.getTime());
+
+                    }
+
+                    if(dose2_appointment_new.equals(appointment.getAppointmentId())){
+                        System.out.println(dose2_appointment_new);
+                        ldt_dose2 = LocalDateTime.ofInstant(dose2_date, ZoneOffset.UTC);
+                        System.out.println("LocalDateTime : " + ldt_dose2);
+                        appointment.setTime(ldt_dose2);
+                        System.out.println(appointment.getTime());
+                    }      
                 }
-                
-                if(dose2_appointment_new.equals(appointment.getAppointmentId())){
-                    System.out.println(dose2_appointment_new);
-                    ldt_dose2 = LocalDateTime.ofInstant(dose2_date, ZoneOffset.UTC);
-                    System.out.println("LocalDateTime : " + ldt_dose2);
-                    appointment.setTime(ldt_dose2);
-                    System.out.println(appointment.getTime());
-                }      
+
+                JOptionPane.showMessageDialog(jFrame_popup, "Appointment Confirmed!\n\n"+
+                        "Dose 1 : "+ldt_dose1.getDayOfMonth()+"/"+ldt_dose1.getMonthValue()+"/"+ldt_dose1.getYear()+" "+ldt_dose1.getHour() + ":" + ldt_dose1.getMinute()+"\n"
+                +"Dose 2 : "+ldt_dose2.getDayOfMonth()+"/"+ldt_dose2.getMonthValue()+"/"+ldt_dose2.getYear()+" "+ldt_dose2.getHour() + ":" + ldt_dose2.getMinute()+"\n");
+
+
+
+
+
             }
-            
-            JOptionPane.showMessageDialog(jFrame_popup, "Appointment Confirmed!\n\n"+
-                    "Dose 1 : "+ldt_dose1.getDayOfMonth()+"/"+ldt_dose1.getMonthValue()+"/"+ldt_dose1.getYear()+" "+ldt_dose1.getHour() + ":" + ldt_dose1.getMinute()+"\n"
-            +"Dose 2 : "+ldt_dose2.getDayOfMonth()+"/"+ldt_dose2.getMonthValue()+"/"+ldt_dose2.getYear()+" "+ldt_dose2.getHour() + ":" + ldt_dose2.getMinute()+"\n");
-            
-           
-               
-                            
-                           
-        }
-        
-        else if (value == 0){
-            
-            //Show box to enter valid date
-            JOptionPane.showMessageDialog(jFrame_popup, "Please Enter Different Dates for Dose 1 & Dose 2");
+
+            else if (value == 0){
+
+                //Show box to enter valid date
+                JOptionPane.showMessageDialog(jFrame_popup, "Please Enter Different Dates for Dose 1 & Dose 2");
+            }
+
+            else{
+               //Date1 is bigger than Date2
+                    //Show box to enter valid date
+                    JOptionPane.showMessageDialog(jFrame_popup, "Please Enter Valid Appointment Dates!");
+            }
         }
             
         else{
-           //Date1 is bigger than Date2
-                //Show box to enter valid date
-                JOptionPane.showMessageDialog(jFrame_popup, "Please Enter Valid Dose 1 Date");
-        }
-    
-        
+            
+            
+            //get date and time from GUI
 
+            Instant dose1_date = jDateChooser1.getDate().toInstant();
+          
+
+            System.out.println(dose1_date);
+
+
+
+            //Check if Dose2 appointment date is bigger than dose1 appointment
+
+            
+
+            List<Appointment> appointment_list = appointmentdao.all();
+            List<UUID> arr_appointment_id = new ArrayList<UUID>();
+
+           
+                //get appointment ids
+                for(Appointment appointment : appointment_list){
+                    if(appointment.getPeople().getUsername().equals(jTextField1.getText())){
+                     arr_appointment_id.add(appointment.getAppointmentId());
+                    }
+                }
+
+
+                UUID dose1_appointment_new = arr_appointment_id.get(0);
+                
+
+                LocalDateTime ldt_dose1 = null;
+                
+
+                for(Appointment appointment : appointment_list){
+                    if(dose1_appointment_new.equals(appointment.getAppointmentId())){
+                        System.out.println(dose1_appointment_new);
+                         ldt_dose1 = LocalDateTime.ofInstant(dose1_date, ZoneOffset.UTC);
+                        System.out.println("LocalDateTime : " + ldt_dose1);
+                        appointment.setTime(ldt_dose1);
+                        System.out.println(appointment.getTime());
+
+                    }
+
+                }
+
+                JOptionPane.showMessageDialog(jFrame_popup, "Appointment Confirmed!\n\n"+
+                        "Dose 1 : "+ldt_dose1.getDayOfMonth()+"/"+ldt_dose1.getMonthValue()+"/"+ldt_dose1.getYear()+" "+ldt_dose1.getHour() + ":" + ldt_dose1.getMinute()+"\n"
+                );
+
+
+
+
+
+            }
+
+            
+        
+                    
+                 
         
         
        
