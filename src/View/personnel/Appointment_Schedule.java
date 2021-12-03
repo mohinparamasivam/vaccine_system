@@ -151,7 +151,7 @@ public class Appointment_Schedule extends javax.swing.JFrame {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-        People people = peopleDao.getRegisteredPeople().get(cbbCentre.getSelectedIndex());
+        People people = peopleDao.getRegisteredPeople().get(cbbPeople.getSelectedIndex());
         Centre centre = centreDao.all().get(cbbCentre.getSelectedIndex());
         LocalDateTime time = dtpTime.getDateTimeStrict();
 

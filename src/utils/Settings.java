@@ -4,6 +4,7 @@
  */
 package utils;
 
+import com.itextpdf.io.font.constants.StandardFonts;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -61,6 +62,8 @@ public class Settings {
             // set the properties value
             prop.setProperty("db.folder", "data/");
             prop.setProperty("report.folder", "report/");
+            prop.setProperty("report.header-font", StandardFonts.TIMES_BOLD);
+            prop.setProperty("report.content-font", StandardFonts.TIMES_ROMAN);
 
             // save properties to project root folder
             prop.store(output, null);

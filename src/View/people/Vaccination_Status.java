@@ -22,6 +22,7 @@ public class Vaccination_Status extends javax.swing.JFrame {
      */
     public Vaccination_Status() {
         people = People_Dashboard.getLoggedInPeople();
+        this.setTitle(people.getName());
         initComponents();
         initInformation();
     }

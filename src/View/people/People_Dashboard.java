@@ -24,7 +24,8 @@ public class People_Dashboard extends javax.swing.JFrame {
      * Creates new form People_Dashboard
      */
     public People_Dashboard() {
-        loggedInPeople = peopleDao.all().get(1);
+//        loggedInPeople = peopleDao.all().get(1);
+        this.setTitle(loggedInPeople.getName());
         initComponents();
     }
 
@@ -33,6 +34,7 @@ public class People_Dashboard extends javax.swing.JFrame {
      */
     public People_Dashboard(People people) {
         loggedInPeople = people;
+        this.setTitle(loggedInPeople.getName());
         initComponents();
     }
 

@@ -348,8 +348,16 @@ public class People_Register extends javax.swing.JFrame {
             strbError.append("Duplicated username. \n");
         }
 
-        if (peopleId.isEmpty() || isCitizen && !Validator.isValidNRIC(peopleId)) {
+        if (peopleId.isEmpty()) {
+            strbError.append("Please insert the " + (isCitizen ? "IC" : "passport") + "\n");
+        }
+
+        if (isCitizen && !Validator.isValidNRIC(peopleId)) {
             strbError.append("Invalid NRIC number. (Format: yymmddXXXXXX)\n");
+        }
+
+        if (isCitizen && peopleDao.isDuplicatedIc(peopleId)) {
+            strbError.append("People with this IC existed in the system. \n");
         }
 
         if (!Validator.isDateBeforeNow(dob)) {
@@ -362,6 +370,10 @@ public class People_Register extends javax.swing.JFrame {
 
         if (country.isEmpty() || !Validator.isWords(country)) {
             strbError.append("Invalid country. \n");
+        }
+
+        if(contact.isEmpty() || !Validator.isNumeric(contact)){
+            strbError.append("Invalid contact. \n");
         }
 
         if (strbError.length() == 0) {
