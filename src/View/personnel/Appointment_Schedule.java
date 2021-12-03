@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.Appointment;
 import model.Centre;
 import model.People;
 import utils.Validator;
@@ -163,19 +165,19 @@ public class Appointment_Schedule extends javax.swing.JFrame {
         }
 
 
-//        if (strbError.length() == 0) {
-//            int result = -1;
-//            if (people.getVaccinationStatus() == People.VaccincationStatus.FULLY_VACCINATED) {
-//                result = JOptionPane.showConfirmDialog(null, "This people is fully vaccinated \nAre you sure you want to continue?", "Schedule Appointment", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-//            }
-//            if (result == -1 || result == JOptionPane.YES_OPTION) {
-//                appDao.create(new Appointment(time, centre, people, Appointment.AppointmentStatus.PENDING));
-//                JOptionPane.showMessageDialog(null, "Appointment created successfully!");
-//                btnBackActionPerformed(evt);
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, strbError.toString(), "Invalid Input!", JOptionPane.ERROR_MESSAGE);
-//        }
+        if (strbError.length() == 0) {
+            int result = -1;
+            if (people.getVaccinationStatus() == People.VaccincationStatus.FULLY_VACCINATED) {
+                result = JOptionPane.showConfirmDialog(null, "This people is fully vaccinated \nAre you sure you want to continue?", "Schedule Appointment", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            }
+            if (result == -1 || result == JOptionPane.YES_OPTION) {
+                appDao.create(new Appointment(time, centre, people, Appointment.AppointmentStatus.PENDING));
+                JOptionPane.showMessageDialog(null, "Appointment created successfully!");
+                btnBackActionPerformed(evt);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, strbError.toString(), "Invalid Input!", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnOkActionPerformed
 
