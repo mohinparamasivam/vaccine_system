@@ -96,5 +96,17 @@ public class FilePeopleDAO extends FileBaseDAO<People> implements PeopleDAO {
 
     }
 
+    @Override
+    public boolean isDuplicatedIc(String ic) {
+        List<People> peoples = this.getCitizens();
+        for (People people : peoples) {
+            if (people.getPeopleId().equals(ic)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
 }

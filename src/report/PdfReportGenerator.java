@@ -16,6 +16,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
 import java.io.File;
 import java.util.List;
+import utils.Settings;
 
 /**
  *
@@ -23,8 +24,8 @@ import java.util.List;
  */
 public class PdfReportGenerator extends FileReportGenerator {
 
-    private String font = StandardFonts.TIMES_ROMAN;
-    private String boldFont = StandardFonts.TIMES_BOLD;
+    private String font = Settings.getProperty("report.header-font", StandardFonts.TIMES_BOLD);
+    private String boldFont = Settings.getProperty("report.content-font", StandardFonts.TIMES_ROMAN);
     private final LineSeparator ls = new LineSeparator(new SolidLine());
 
     public PdfReportGenerator(String fileName, List<? extends Generatable> subjects) {

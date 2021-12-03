@@ -25,4 +25,6 @@ public interface PeopleDAO extends BaseRootDAO<People> {
 
     public boolean isDuplicatedUsername(String username);
 
+    public boolean isDuplicatedIc(String ic);
+
 }
