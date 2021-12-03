@@ -34,6 +34,9 @@ public class Check_Appointment extends javax.swing.JFrame {
      * Creates new form Check_Appointment
      */
     public Check_Appointment() {
+        People people = People_Dashboard.getLoggedInPeople();
+//        People people = peopledao.all().get(0);
+        this.setTitle(people.getName());
         initComponents();
     }
 
