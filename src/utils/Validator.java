@@ -46,16 +46,14 @@ public class Validator {
 		 
 		 return true;
 	}
-	
-	
+
 	public static boolean isValidContact(String contact) {
             String txt = contact.trim().toUpperCase();
             //can only digit, not less than 9, not more than 11, start with 01 or 08
             //to upper case
             return Pattern.matches("(^01[\\d]{7,9}$)|(^(08)[\\d]{7,8}$)", txt);
 	}
-	
-	
+
 	public static boolean isValidEmail(String email) {
 		 String txt =email.trim(); 
 		

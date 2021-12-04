@@ -24,7 +24,9 @@ public class PdfReportGeneratorTest {
     public void testSaveReport() {
         People test1 = FilePeopleDAO.getInstance().all().get(0);
         FileReportGenerator pdfGenerator = new PdfReportGenerator("testing_report", test1.getVaccinationReportGeneratables());
-        pdfGenerator.saveReport();
+        FileReportGenerator txtGenerator = new TxtReportGenerator("testing_report", test1.getVaccinationReportGeneratables());
+        pdfGenerator.saveReport(); // create a pdf report
+        txtGenerator.saveReport(); // create a txt report
     }
 
 }

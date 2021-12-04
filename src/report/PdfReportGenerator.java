@@ -26,10 +26,11 @@ public class PdfReportGenerator extends FileReportGenerator {
 
     private String font = Settings.getProperty("report.header-font", StandardFonts.TIMES_BOLD);
     private String boldFont = Settings.getProperty("report.content-font", StandardFonts.TIMES_ROMAN);
-    private final LineSeparator ls = new LineSeparator(new SolidLine());
+    private final LineSeparator ls;
 
     public PdfReportGenerator(String fileName, List<? extends Generatable> subjects) {
         super(fileName + ".pdf", subjects);
+        ls = new LineSeparator(new SolidLine());
     }
 
     public String getFont() {

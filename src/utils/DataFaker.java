@@ -210,9 +210,9 @@ public class DataFaker {
         List<Centre> centres = centreDAO.all();
 
         List<List<People.PeopleType>> access = new ArrayList<>();
-        access.add(VaccineSupply.getAccessOnlyCitizen());
-        access.add(VaccineSupply.getAccessOnlyNonCitizen());
-        access.add(VaccineSupply.getAccessCitizenAndNonCitizen());
+        access.add(People.PeopleType.getAccessOnlyCitizen());
+        access.add(People.PeopleType.getAccessOnlyNonCitizen());
+        access.add(People.PeopleType.getAccessCitizenAndNonCitizen());
 
         //create 3 supply for centre 1, mixed accessibility
         List<VaccineSupply> vsSupplies = new ArrayList<>();

@@ -4,7 +4,7 @@
  */
 package DAOFileImp;
 
-import static org.junit.Assert.assertEquals;
+import DAO.VaccineSupplyDAO;
 import org.junit.Test;
 
 /**
@@ -18,8 +18,11 @@ public class FileVaccineSupplyDAOTest {
 
     @Test
     public void test() {
-        boolean result = FileVaccineSupplyDAO.getInstance().isDuplicatedBatchNo("VS201");
-        assertEquals(true, result);
+//        boolean result = FileVaccineSupplyDAO.getInstance().isDuplicatedBatchNo("VS201");
+        VaccineSupplyDAO vaccineSupplyDao = FileVaccineSupplyDAO.getInstance();
+        vaccineSupplyDao.create(t);
+        vaccineSupplyDao.create(t, testCentre);
     }
+
 
 }

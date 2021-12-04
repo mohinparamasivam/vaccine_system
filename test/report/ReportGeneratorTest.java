@@ -48,6 +48,14 @@ public class ReportGeneratorTest {
         ReportGenerator instance = new ReportGenerator(subjects);
         Logger logger = LogManager.getLogger(ReportGeneratorTest.class);
         logger.debug(instance.getRawContent());
+
+    }
+
+    /**
+     * Test of printReport method, of class ReportGenerator.
+     */
+    @Test
+    public void testPrintReport() {
     }
 
 }

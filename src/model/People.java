@@ -198,6 +198,25 @@ public class People extends User implements Generatable {
         CITIZEN,
         NON_CITIZEN;
 
+        public static List<People.PeopleType> getAccessOnlyCitizen() {
+            List<People.PeopleType> onlyCitizen = new ArrayList<>();
+            onlyCitizen.add(People.PeopleType.CITIZEN);
+            return onlyCitizen;
+        }
+
+        public static List<People.PeopleType> getAccessOnlyNonCitizen() {
+            List<People.PeopleType> onlyNonCitizen = new ArrayList<>();
+            onlyNonCitizen.add(People.PeopleType.NON_CITIZEN);
+            return onlyNonCitizen;
+        }
+
+        public static List<People.PeopleType> getAccessCitizenAndNonCitizen() {
+            List<People.PeopleType> citizenAndNonCitizen = new ArrayList<>();
+            citizenAndNonCitizen.add(People.PeopleType.CITIZEN);
+            citizenAndNonCitizen.add(People.PeopleType.NON_CITIZEN);
+            return citizenAndNonCitizen;
+        }
+
         @Override
         public String toString() {
             return Util.capitalizeFirstLetter(this.name());

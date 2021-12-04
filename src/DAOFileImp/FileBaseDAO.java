@@ -103,6 +103,7 @@ public abstract class FileBaseDAO<T extends Model> implements BaseRootDAO<T> {
     @Override
     public void replace(List<T> tList) {
         writeObjectsToFile(DATA_FILE, tList);
+        logger.info("Data is replaced");
     }
 
 
@@ -124,14 +125,17 @@ public abstract class FileBaseDAO<T extends Model> implements BaseRootDAO<T> {
             T elementT = (T) itr.next();
             if (elementT.getKey().equals(id)) {
                 itr.remove();
+                logger.info("{} object deleted: key [{}]", elementT.getClass().getSimpleName(), elementT.getKey());
             }
         }
         writeObjectsToFile(DATA_FILE, ts);
+
     }
 
     @Override
     public void deleteAll() {
         writeObjectsToFile(DATA_FILE, new ArrayList<T>());
+        logger.info("Data is deleted");
     }
 
 

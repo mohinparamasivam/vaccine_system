@@ -73,8 +73,8 @@ public class People_Register extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("People Registration");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -116,8 +116,8 @@ public class People_Register extends javax.swing.JFrame {
         txtAddress.setRows(5);
         jScrollPane1.setViewportView(txtAddress);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Citizenship :");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         btnGroupCitizenship.add(rbtnMalaysian);
         rbtnMalaysian.setSelected(true);
@@ -138,6 +138,8 @@ public class People_Register extends javax.swing.JFrame {
 
         jLabel5.setText("Date of birth:");
 
+        txtCountry.setText("Malaysia");
+        txtCountry.setEnabled(false);
         txtCountry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCountryActionPerformed(evt);
