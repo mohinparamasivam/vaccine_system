@@ -368,10 +368,6 @@ public class People_Record_Modify extends javax.swing.JFrame {
             strbError.append("Invalid name. \n");
         }
 
-        if (username.isEmpty() || peopleDao.isDuplicatedUsername(username)) {
-            strbError.append("Duplicated username. \n");
-        }
-
         if (peopleId.isEmpty() || isCitizen && !Validator.isValidNRIC(peopleId)) {
             strbError.append("Invalid NRIC number. (Format: yymmddXXXXXX)\n");
         }
